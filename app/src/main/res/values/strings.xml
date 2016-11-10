@@ -3,10 +3,7 @@
     <string name="login_page">Login</string>
     <string name="footer">
         Copyright \u00A9 2016\n
-        Alex\n
-        Andrew\n
-        DK\n
-        Eck\n
+        Alex Andrew DK Eck\n
         All Rights Reserved
     </string>
 </resources>
