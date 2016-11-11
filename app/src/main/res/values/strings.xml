@@ -2,8 +2,8 @@
     <string name="app_name">Salad Bar</string>
     <string name="login_page">Login</string>
     <string name="footer">
-        Copyright \u00A9 2016\n
-        Alex Andrew DK Eck\n
+        Copyright \u00A9 2016
+        Alex Andrew DK Eck
         All Rights Reserved
     </string>
 </resources>
