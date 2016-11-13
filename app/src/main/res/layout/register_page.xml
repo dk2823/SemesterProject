@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        >
+
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:src="@drawable/salad"/>
+
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/logLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="30dp"
+
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            android:text="Register"/>
+
+        <EditText
+            android:paddingTop="30dp"
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your username"/>
+        <EditText
+            android:paddingTop="30dp"
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your password"/>
+        <EditText
+            android:paddingTop="30dp"
+            android:id="@+id/confirm_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Confirm your username"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="283dp"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp">
+        <Button
+            android:text="Register"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/button" />
+    </LinearLayout>
+
+</LinearLayout>
