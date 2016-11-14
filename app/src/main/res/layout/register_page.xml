@@ -7,6 +7,8 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:background="@color/background_color"
+        android:layout_weight="1"
         >
 
 
@@ -16,6 +18,16 @@
             android:layout_height="70dp"
             android:src="@drawable/salad"/>
 
+        <TextView
+            android:layout_toRightOf="@id/logo"
+            android:paddingStart="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            android:text="Register"/>
+
     </RelativeLayout>
     <LinearLayout
         android:id="@+id/logLayout"
@@ -23,17 +35,9 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingTop="30dp"
-
+        android:layout_weight="3"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="#000000"
-            android:textSize="30sp"
-            android:text="Register"/>
 
         <EditText
             android:paddingTop="30dp"
@@ -66,6 +70,24 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:id="@+id/button" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:layout_weight="1"
+        android:background="@color/background_color"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textStyle="bold|italic"
+            android:text="@string/footer"/>
+
+
     </LinearLayout>
 
 </LinearLayout>

@@ -9,23 +9,22 @@
     <RelativeLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_weight="2"
+        android:layout_height="40dp"
+        android:layout_weight="1"
         android:background="@color/background_color">
 
 
         <ImageView
             android:id="@+id/logo"
-            android:layout_width="70dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:paddingStart="5dp"
             android:src="@drawable/salad"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="70dp"
-            android:paddingTop="15dp"
+            android:paddingLeft="60dp"
+            android:paddingTop="5dp"
             android:textColor="#000000"
             android:textSize="30sp"
             android:layout_toRightOf="@id/logo"
@@ -81,6 +80,7 @@
         android:layout_marginRight="10dp">
 
         <Button
+            android:id="@+id/forgotPasswordHelp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -89,6 +89,7 @@
             android:text="Forgot Password?"/>
 
         <Button
+            android:id="@+id/registerHelp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
