@@ -32,18 +32,29 @@
 
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/registrationOrpasswordRecoveryResult"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#A52A2A"
+        android:textStyle="bold|italic"
+        android:paddingTop="20dp"
+        android:textSize="20sp"
+        android:layout_weight="1"/>
+
     <LinearLayout
         android:id="@+id/logLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="10dp"
+        android:paddingTop="30dp"
         android:layout_weight="5"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp">
 
         <EditText
-            android:paddingTop="30dp"
+
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

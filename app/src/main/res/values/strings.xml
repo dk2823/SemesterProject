@@ -6,4 +6,10 @@
         Alex Andrew DK Eck
         All Rights Reserved
     </string>
+    <string name="create_success">Account created successfully!</string>
+    <string name="username_in_use">Registration failed!\nUsername in use</string>
+    <string name="password_not_matching_confirm">
+        Registration failed!\nPassword does not match\nConfirm password
+    </string>
+    <string name="entry_missing">All fields need to be filled!</string>
 </resources>
