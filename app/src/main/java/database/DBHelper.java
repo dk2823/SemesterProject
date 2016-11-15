@@ -148,4 +148,9 @@ public class DBHelper extends SQLiteOpenHelper {
                         ingredientsListStr, r.getRestaurantId(), u1.getUserId(), quanList);
 
 
+                userDBO.close();
+                restaurantDBO.close();
+                ingredientDBO.close();
+                preferenceDBO.close();
+
 * */
