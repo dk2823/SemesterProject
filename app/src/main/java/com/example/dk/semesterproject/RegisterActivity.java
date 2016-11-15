@@ -1,6 +1,7 @@
 package com.example.dk.semesterproject;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -42,7 +43,10 @@ public class RegisterActivity extends Activity {
             public void onClick(View v) {
                 switch (check()) {
                     case SUCCESS:
-                        setResult(RESULT_OK);
+                        Intent intent= new Intent();
+                        intent.putExtra(MainActivity.USERNAME,
+                                mUsername.getText().toString().trim());
+                        setResult(RESULT_OK, intent);
                         finish();
                         break;
                     case USERNAME_IN_USE:
@@ -67,13 +71,17 @@ public class RegisterActivity extends Activity {
         String confirmPassword= mConfirm.getText().toString();
 
         if (!username.equals("") && !password.equals("") && !confirmPassword.equals("")) {
-            // TODO Check whether the username is in use
+            if (true)// TODO Check whether the username is in use
+            {
+                // Check whether the password matches the confirmation password
+                if (password.equals(confirmPassword)) {
+                    // TODO Store the user credentials into the database then return SUCCESS
 
-            // Check whether the password matches the confirmation password
-            if (password.equals(confirmPassword))
-                return SUCCESS;
-            else
-                return PASSWORDS_DO_NOT_MATCH;
+                    return SUCCESS;
+                }
+                else
+                    return PASSWORDS_DO_NOT_MATCH;
+            }
         }
         return ENTRY_MISSING;
     }
