@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.dk.semesterproject">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,6 +23,12 @@
             android:label="Register"
             android:screenOrientation="portrait">
 
+        </activity>
+
+        <activity
+            android:name=".PasswordRecoveryActivity"
+            android:label="Password Recovery"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

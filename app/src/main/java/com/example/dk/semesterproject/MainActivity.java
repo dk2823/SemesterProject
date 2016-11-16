@@ -48,6 +48,14 @@ public class MainActivity extends Activity {
                 startActivityForResult(intent, CREATE_ACCOUNT);
             }
         });
+
+        mForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(getApplicationContext(), PasswordRecoveryActivity.class);
+                startActivityForResult(intent, RECOVER_PASSWORD);
+            }
+        });
     }
 
     @Override
@@ -58,7 +66,7 @@ public class MainActivity extends Activity {
                 mUsername.setText(data.getExtras().getString(USERNAME));
             }
             else
-                mStatus.setText("Password Successfully sent to\n"+
+                mStatus.setText("Password successfully sent to\n"+
                     data.getExtras().getString(EMAIL));
         }
     }

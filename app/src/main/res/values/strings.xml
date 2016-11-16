@@ -13,4 +13,12 @@
     </string>
     <string name="entry_missing">All fields need to be filled!</string>
     <string name="invalid_email"> Invalid Email Provided!</string>
+    <string name="email_body">
+        Your login credentials are:\n\n
+    </string>
+    <string name="email_footer">
+        \n\nThank you for using Salad Bar App\nPlease do not reply to this email\n\n
+        Salad Bar App Team
+    </string>
+    <string name="email_subject">Your password recovery email</string>
 </resources>
