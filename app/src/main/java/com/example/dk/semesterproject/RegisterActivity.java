@@ -3,6 +3,7 @@ package com.example.dk.semesterproject;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,12 +17,14 @@ public class RegisterActivity extends Activity {
     private static final int SUCCESS= 0;
     private static final int USERNAME_IN_USE= 1;
     private static final int PASSWORDS_DO_NOT_MATCH= 2;
-    private static final int ENTRY_MISSING= 3;
+    private static final int EMAIL_WRONG_FORMAT= 3;
+    private static final int ENTRY_MISSING= 4;
 
     private Button mRegister;
     private EditText mUsername;
     private EditText mPassword;
     private EditText mConfirm;
+    private EditText mEmail;
     private TextView mRegistrationStatus;
 
     @Override
@@ -34,6 +37,7 @@ public class RegisterActivity extends Activity {
         mUsername= (EditText) findViewById(R.id.username);
         mPassword= (EditText) findViewById(R.id.password);
         mConfirm= (EditText) findViewById(R.id.confirm_password);
+        mEmail= (EditText) findViewById(R.id.email);
         mRegistrationStatus= (TextView) findViewById(R.id.registrationStatus);
 
         // When the Register button is pressed, attempt to register this user.
@@ -55,6 +59,9 @@ public class RegisterActivity extends Activity {
                     case PASSWORDS_DO_NOT_MATCH:
                         mRegistrationStatus.setText(R.string.password_not_matching_confirm);
                         break;
+                    case EMAIL_WRONG_FORMAT:
+                        mRegistrationStatus.setText(R.string.invalid_email);
+                        break;
                     default:
                         mRegistrationStatus.setText(R.string.entry_missing);
                 }
@@ -69,20 +76,36 @@ public class RegisterActivity extends Activity {
         String username= mUsername.getText().toString().trim();
         String password= mPassword.getText().toString();
         String confirmPassword= mConfirm.getText().toString();
+        String email= mEmail.getText().toString().trim();
 
-        if (!username.equals("") && !password.equals("") && !confirmPassword.equals("")) {
+        if (!username.equals("") && !password.equals("") && !confirmPassword.equals("") &&
+                !email.equals("")) {
             if (true)// TODO Check whether the username is in use
             {
                 // Check whether the password matches the confirmation password
-                if (password.equals(confirmPassword)) {
+                if (!isValidEmail(email)) {
+                    return EMAIL_WRONG_FORMAT;
+                }
+                else if (!password.equals(confirmPassword)) {
+
+                    return PASSWORDS_DO_NOT_MATCH;
+                }
+                else {
                     // TODO Store the user credentials into the database then return SUCCESS
 
                     return SUCCESS;
                 }
-                else
-                    return PASSWORDS_DO_NOT_MATCH;
             }
         }
         return ENTRY_MISSING;
+    }
+
+    /**
+     *  Returns true if the email is valid, false otherwise
+     *  @param email The email to check
+     *  @return true if the email is valid false otherwise
+     */
+    public static boolean isValidEmail(String email) {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 }

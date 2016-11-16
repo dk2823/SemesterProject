@@ -12,4 +12,5 @@
         Registration failed!\nPassword does not match\nConfirm password
     </string>
     <string name="entry_missing">All fields need to be filled!</string>
+    <string name="invalid_email"> Invalid Email Provided!</string>
 </resources>
