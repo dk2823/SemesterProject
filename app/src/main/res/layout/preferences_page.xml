@@ -56,6 +56,19 @@
             android:text="HERE"/>
 
     </RelativeLayout>
+    <!--<ListView-->
+        <!--android:id="@+id/sampleListView"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="298dp"-->
+        <!--android:layout_marginBottom="10dp"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:background="@android:color/transparent"-->
+        <!--android:cacheColorHint="@android:color/transparent"-->
+        <!--android:divider="#CCCCCC"-->
+        <!--android:dividerHeight="1dp"-->
+        <!--android:paddingLeft="2dp" >-->
+    <!--</ListView>-->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
