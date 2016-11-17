@@ -27,7 +27,7 @@
             android:layout_gravity="center"
             android:textColor="#000000"
             android:textSize="30sp"
-            android:text="Saved Preferneces"/>
+            android:text="Confirmation"/>
 
     </RelativeLayout>
 
@@ -38,46 +38,64 @@
         android:layout_weight="1"
         >
 
+        <!--android:src="@drawable/salad"-->
+
+        <ListView
+        android:id="@+id/sampleListView"
+        android:layout_width="fill_parent"
+        android:layout_height="298dp"
+            android:background="@android:color/transparent"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="#CCCCCC"
+        android:dividerHeight="1dp"
+        android:paddingLeft="2dp"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/image">
+        </ListView>
+
         <ImageView
             android:id="@+id/image"
             android:layout_width="100dp"
-            android:layout_height="70dp" />
-            <!--android:src="@drawable/salad"-->
-
+            android:layout_height="70dp"
+            android:layout_gravity="right"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
 
         <TextView
-            android:layout_toRightOf="@id/image"
+            android:id="@+id/name_of_rest"
             android:paddingStart="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textColor="#000000"
             android:textSize="30sp"
-            android:text="HERE"/>
+            android:text="HERE"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/image" />
+
+        <TextView
+            android:id="@+id/total_price"
+            android:paddingStart="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            android:text="HERE"
+            android:layout_alignBottom="@+id/image"
+            android:layout_toEndOf="@+id/image" />
 
     </RelativeLayout>
-    <!--<ListView-->
-        <!--android:id="@+id/sampleListView"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="298dp"-->
-        <!--android:layout_marginBottom="10dp"-->
-        <!--android:layout_marginTop="5dp"-->
-        <!--android:background="@android:color/transparent"-->
-        <!--android:cacheColorHint="@android:color/transparent"-->
-        <!--android:divider="#CCCCCC"-->
-        <!--android:dividerHeight="1dp"-->
-        <!--android:paddingLeft="2dp" >-->
-    <!--</ListView>-->
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="78dp"
         android:orientation="vertical"
         android:gravity="center"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp">
         <Button
-            android:text="Back"
+            android:text="Order"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:id="@+id/backButton" />
