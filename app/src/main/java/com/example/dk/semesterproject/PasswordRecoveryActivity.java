@@ -31,7 +31,8 @@ public class PasswordRecoveryActivity extends Activity {
     private Context mContext;
     private Button mSendPasswordButton;
     private TextView mPasswordRecoveryStatus;
-    private EditText mEmail;
+    private EditText mUsername;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,17 +43,16 @@ public class PasswordRecoveryActivity extends Activity {
 
         mSendPasswordButton= (Button) findViewById(R.id.emailButton);
         mPasswordRecoveryStatus= (TextView) findViewById(R.id.passwordRecoveryStatus);
-        mEmail= (EditText) findViewById(R.id.email_for_recovery);
+        mUsername= (EditText) findViewById(R.id.username_recovery);
+        username= mUsername.getText().toString().trim();
 
         mSendPasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email= mEmail.getText().toString().trim();
-
-                if (RegisterActivity.isValidEmail(email))
-                    new SendEmail().execute(email);
+                if (!username.equals(""))
+                    new SendEmail().execute(username);
                 else
-                    mPasswordRecoveryStatus.setText("Please provide a valid email!");
+                    mPasswordRecoveryStatus.setText(R.string.entry_missing);
             }
         });
     }
@@ -97,6 +97,9 @@ public class PasswordRecoveryActivity extends Activity {
             properties.put("mail.smtp.auth", SMTP_AUTH);
             properties.put("mail.smtp.starttls.enable", START_TLS);
 
+            // Retrieve the user
+            User user= getUsernameAndPassword();
+
 
             try {
                 // Prepare the message
@@ -110,17 +113,16 @@ public class PasswordRecoveryActivity extends Activity {
                 });
                 message= new MimeMessage(session);
                 message.setFrom(new InternetAddress(FROM_EMAIL));
-                message.addRecipient(Message.RecipientType.TO, new InternetAddress(params[0]));
+                message.addRecipient(Message.RecipientType.TO, new InternetAddress(user.email));
                 message.setSubject(mContext.getString(R.string.email_subject));
-                message.setContent(mContext.getString(R.string.email_body) +
-                    getUsernameAndPassword() + mContext.getString(R.string.email_footer), PLAIN);
+                message.setContent(mContext.getString(R.string.email_body) + user +
+                        mContext.getString(R.string.email_footer), PLAIN);
 
                 // Send the email
                 Thread.sleep(2000);
-                publishProgress("Sending email to " + params[0] + "...");
+                publishProgress("Sending email to " + user.email + "...");
                 transport = session.getTransport("smtp");
                 transport.connect(EMAIL_HOST, FROM_EMAIL, PASSWORD);
-                Log.i(TAG, "I am here");
                 transport.sendMessage(message, message.getAllRecipients());
                 transport.close();
 
@@ -136,7 +138,7 @@ public class PasswordRecoveryActivity extends Activity {
                 Log.e(TAG, "Thread Interrupted");
             }
 
-            return params[0];
+            return user.email;
         }
 
         @Override
@@ -151,15 +153,34 @@ public class PasswordRecoveryActivity extends Activity {
 
     /**
      * Retrieves the username and the password based on the email provided
-     * @return the String containing the username and the password of the user
+     * @return the User object containing the username and the password of the user
      */
-    private String getUsernameAndPassword() {
-        String result;
+    private User getUsernameAndPassword() {
 
-        // TODO Query the database
-        result= "username: jotoude\npassword: 1234";
+        // TODO Query the database based on the username. Create the user object and return it
 
-        return result;
+
+        return null;
+    }
+
+    /**
+     * User class
+     */
+    private class User {
+        private String username;
+        private String password;
+        private String email;
+
+        public User(String username, String password, String email) {
+            this.username= username;
+            this.password= password;
+            this.email= email;
+        }
+
+        @Override
+        public String toString() {
+            return "Username: " + username + "\nPassword: " + password;
+        }
     }
 
 }
