@@ -31,6 +31,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.sun.mail:android-mail:1.5.5'
     compile 'com.sun.mail:android-activation:1.5.5'
+    compile 'com.android.support:support-v4:24.+'
 }
 
 repositories {

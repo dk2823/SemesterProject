@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background">
+
+        <RelativeLayout
+            android:id="@+id/rel1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:background="@color/background_color">
+
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/salad"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textSize="30sp"
+                android:textColor="#000000"
+                android:text="Order"/>
+
+
+            <TextView
+                android:id="@+id/username_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:paddingRight="2dp"
+                android:textColor="#DC143C"
+                android:layout_alignParentRight="true"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/restaurant_selector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:paddingLeft="10dp"
+            android:paddingTop="20dp"
+            android:layout_below="@id/rel1"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:text="Please select a restaurant"/>
+
+        <Spinner
+            android:id="@+id/restaurant_chooser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/restaurant_selector"
+            android:layout_below="@id/rel1"
+            android:layout_marginLeft="10dp"
+            android:paddingTop="15dp" />
+
+        <ImageView
+            android:id="@+id/salad_order"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_below="@id/restaurant_selector"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/plate"/>
+
+        <RelativeLayout
+            android:id="@+id/ingredients_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/salad_order"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/ingredients_border">
+
+            <TextView
+                android:id="@+id/ingredients_order"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ingredients"
+                android:paddingTop="2dp"
+                android:paddingLeft="4dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold|italic"/>
+
+            <RadioGroup
+                android:id="@+id/radio_buttons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@id/ingredients_order"
+                android:layout_centerHorizontal="true">
+
+                <RadioButton
+                    android:id="@+id/radio_small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="small"
+                    android:textIsSelectable="true"/>
+
+                <RadioButton
+                    android:id="@+id/radio_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="medium"
+                    android:checked="true"
+                    android:textIsSelectable="true"/>
+
+                <RadioButton
+                    android:id="@+id/radio_large"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="large"
+                    android:textIsSelectable="true"/>
+
+            </RadioGroup>
+
+            <LinearLayout
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:paddingTop="5dp"
+                android:layout_below="@id/radio_buttons"
+                android:layout_centerInParent="true"
+                android:orientation="vertical">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/pager_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/button_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Place Order"
+            android:layout_below="@id/ingredients_layout"
+            android:textSize="20sp"
+            android:textColor="@color/features"
+            android:layout_centerHorizontal="true"/>
+
+        <LinearLayout
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/button_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="30dp"
+            android:background="@color/background_color"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textStyle="bold|italic"
+                android:text="@string/footer"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</ScrollView>

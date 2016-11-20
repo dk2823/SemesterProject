@@ -12,6 +12,9 @@
         Registration failed!\nPassword does not match\nConfirm password
     </string>
     <string name="entry_missing">All fields need to be filled!</string>
+    <string name="invalid_user">
+        The username and/or password does not match any entry in our database.\nPlease try again.
+    </string>
     <string name="invalid_email"> Invalid Email Provided!</string>
     <string name="email_body">
         Your login credentials are:\n\n
@@ -21,4 +24,13 @@
         Salad Bar App Team
     </string>
     <string name="email_subject">Your password recovery email</string>
+    <string name="order_hints">
+        To place an order select the size of the desired ingredient and drag the ingredient
+        onto the plate.
+    </string>
+    <string-array name="restaurants">
+        <item>House</item>
+        <item>Panera Bread</item>
+        <item>Chart House</item>
+    </string-array>
 </resources>

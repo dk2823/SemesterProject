@@ -40,6 +40,17 @@ public class MainActivity extends Activity {
 
         // Attach listeners to the buttons. When the user clicks on the registration button
         // then the RegisterActivity will start
+        mLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (authenticate()) {
+                    Intent intent= new Intent(MainActivity.this, OrderActivity.class);
+                    intent.putExtra(USERNAME, mUsername.getText().toString().trim());
+                    startActivity(intent);
+                }
+            }
+        });
+
         mRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,4 +81,28 @@ public class MainActivity extends Activity {
                     data.getExtras().getString(EMAIL));
         }
     }
+
+    /**
+     * Authenticates the username and the password. Returns true if the username and the password
+     * match a user in the database
+     * @return true if the user exists false otherwise
+     */
+    private boolean authenticate() {
+        String username= mUsername.getText().toString().trim();
+        String password= mPassword.getText().toString().trim();
+        boolean result;
+
+        if (username.equals("") || password.equals("")) {
+            mStatus.setText(R.string.entry_missing);
+            result= false;
+        } else {
+            // TODO Authenticate this user by query the database. If the user does not exist
+            // TODO set mStatus text to R.string.invalid_user and result should be false.
+            // TODO result should be true
+            result= true;
+        }
+
+        return result;
+    }
+
 }

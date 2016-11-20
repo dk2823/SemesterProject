@@ -26,6 +26,13 @@
         </activity>
 
         <activity
+            android:name=".OrderActivity"
+            android:label="Order"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity
             android:name=".PasswordRecoveryActivity"
             android:label="Password Recovery"
             android:screenOrientation="portrait">
