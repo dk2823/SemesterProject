@@ -49,16 +49,23 @@ public class PasswordRecoveryActivity extends Activity {
         mSendPasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!username.equals(""))
-                    new SendEmail().execute(username);
-                else
+                if (username.equals(""))
                     mPasswordRecoveryStatus.setText(R.string.entry_missing);
+                else {
+                    // Query the database to retrieve the user
+                    User user= getUsernameAndPassword();
+                    if (user != null)
+                        new SendEmail().execute(user);
+                    else
+                        mPasswordRecoveryStatus.setText(R.string.invalid_username);
+                }
+
             }
         });
     }
 
 
-    private class SendEmail extends AsyncTask<String, String, String> {
+    private class SendEmail extends AsyncTask<User, String, String> {
         private static final String TAG= "SendEmail";
         private static final String FROM_EMAIL= "saladBarApp@gmail.com";
         private static final String PASSWORD= "EckDKAlexAndrew";
@@ -89,7 +96,7 @@ public class PasswordRecoveryActivity extends Activity {
         }
 
         @Override
-        protected String doInBackground(String... params) {
+        protected String doInBackground(User... params) {
             // Set up the properties
             publishProgress("Processing input...");
             properties= System.getProperties();
@@ -98,8 +105,7 @@ public class PasswordRecoveryActivity extends Activity {
             properties.put("mail.smtp.starttls.enable", START_TLS);
 
             // Retrieve the user
-            User user= getUsernameAndPassword();
-
+            User user= params[0];
 
             try {
                 // Prepare the message

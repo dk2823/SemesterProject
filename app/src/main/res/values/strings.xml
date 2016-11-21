@@ -3,7 +3,7 @@
     <string name="login_page">Login</string>
     <string name="footer">
         Copyright \u00A9 2016
-        Alex Andrew DK Eck
+        Alex Andrew DK Eck\n
         All Rights Reserved
     </string>
     <string name="create_success">Account created successfully!</string>
@@ -14,6 +14,9 @@
     <string name="entry_missing">All fields need to be filled!</string>
     <string name="invalid_user">
         The username and/or password does not match any entry in our database.\nPlease try again.
+    </string>
+    <string name="invalid_username">
+        The username does not match any entry in our database.\nPlease try again.
     </string>
     <string name="invalid_email"> Invalid Email Provided!</string>
     <string name="email_body">
