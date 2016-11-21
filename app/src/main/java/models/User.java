@@ -62,4 +62,13 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public boolean checkPassword(String password){
+        return this.password.equals(password);
+    }
+
+    public String toString() {
+        return "Username: " + username + "\nPassword: " + password;
+    }
+
 }

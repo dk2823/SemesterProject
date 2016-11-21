@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import database.UserDBO;
+import models.User;
+
 /**
  * Register Page. Provides means to the user to register
  */
@@ -80,18 +83,27 @@ public class RegisterActivity extends Activity {
 
         if (!username.equals("") && !password.equals("") && !confirmPassword.equals("") &&
                 !email.equals("")) {
-            if (true)// TODO Check whether the username is in use
+            UserDBO userDBO = new UserDBO(RegisterActivity.this);
+
+            if (!userDBO.isExist(username))// Check whether the username is in use
             {
                 // Check whether the password matches the confirmation password
                 if (!isValidEmail(email)) {
+                    userDBO.close();
+
                     return EMAIL_WRONG_FORMAT;
                 }
                 else if (!password.equals(confirmPassword)) {
+                    userDBO.close();
 
                     return PASSWORDS_DO_NOT_MATCH;
                 }
                 else {
-                    // TODO Store the user credentials into the database then return SUCCESS
+                    // Store the user credentials into the database then return SUCCESS
+
+                    //For now, I just put username for name of the user
+                    User user = userDBO.createUser(username, username, password, email);
+                    userDBO.close();
 
                     return SUCCESS;
                 }

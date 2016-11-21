@@ -43,24 +43,16 @@ public class UserDBO {
         mDatabase = mHelper.getWritableDatabase();
     }
 
+    public void close(){
+        mDatabase.close();
+    }
+
     public User createUser(String name, String username, String password, String email){
         ContentValues values = new ContentValues();
         values.put(DBHelper.COLUMN_USER_NAME, name);
         values.put(DBHelper.COLUMN_USER_USERNAME, username);
         values.put(DBHelper.COLUMN_USER_PASSWORD, password);
         values.put(DBHelper.COLUMN_USER_EMAIL, email);
-
-
-        Cursor cursor = mDatabase.query(DBHelper.TABLE_USERS, mAllColumns,
-                DBHelper.COLUMN_USER_USERNAME + " = ?",
-                new String[]{username}, null, null, null);
-
-        if(cursor.getCount() > 0){
-            cursor.close();
-            return null;
-        }else{
-            cursor.close();
-        }
 
         long insertId = mDatabase.insert(DBHelper.TABLE_USERS, null, values);
 
@@ -77,7 +69,41 @@ public class UserDBO {
 
     }
 
-    protected  User cursorToUser(Cursor cursor){
+
+    public User getByUsername(String username){
+
+        if(isExist(username)){
+            Cursor cursor = mDatabase.query(DBHelper.TABLE_USERS, mAllColumns,
+                    DBHelper.COLUMN_USER_USERNAME + " = ?",
+                    new String[]{username}, null, null, null);
+
+            User user = cursorToUser(cursor);
+            cursor.close();
+
+            return user;
+        }
+
+        return null;
+    }
+
+    public boolean isExist(String username){
+
+        Cursor cursor = mDatabase.query(DBHelper.TABLE_USERS, mAllColumns,
+                DBHelper.COLUMN_USER_USERNAME + " = ?",
+                new String[]{username}, null, null, null);
+
+        if(cursor.getCount() > 0){
+            cursor.close();
+
+            return true;
+        }else{
+            cursor.close();
+
+            return false;
+        }
+    }
+
+    protected User cursorToUser(Cursor cursor){
         User newUser = new User();
         newUser.setUserId(cursor.getLong(0));
         newUser.setName(cursor.getString(1));
