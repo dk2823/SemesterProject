@@ -23,6 +23,9 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import database.UserDBO;
+import models.User;
+
 /**
  * Activity that allows the user to recover his/her password
  */
@@ -100,6 +103,12 @@ public class PasswordRecoveryActivity extends Activity {
             // Retrieve the user
             User user= getUsernameAndPassword();
 
+            // TODO can you add the case if the user object is null?
+            // TODO in the UserDBO class, it returns null when there's no record for the username
+
+            if(user == null){
+                // TODO do some action here something like show some Toast message
+            }
 
             try {
                 // Prepare the message
@@ -113,14 +122,14 @@ public class PasswordRecoveryActivity extends Activity {
                 });
                 message= new MimeMessage(session);
                 message.setFrom(new InternetAddress(FROM_EMAIL));
-                message.addRecipient(Message.RecipientType.TO, new InternetAddress(user.email));
+                message.addRecipient(Message.RecipientType.TO, new InternetAddress(user.getEmail()));
                 message.setSubject(mContext.getString(R.string.email_subject));
                 message.setContent(mContext.getString(R.string.email_body) + user +
                         mContext.getString(R.string.email_footer), PLAIN);
 
                 // Send the email
                 Thread.sleep(2000);
-                publishProgress("Sending email to " + user.email + "...");
+                publishProgress("Sending email to " + user.getEmail() + "...");
                 transport = session.getTransport("smtp");
                 transport.connect(EMAIL_HOST, FROM_EMAIL, PASSWORD);
                 transport.sendMessage(message, message.getAllRecipients());
@@ -138,7 +147,7 @@ public class PasswordRecoveryActivity extends Activity {
                 Log.e(TAG, "Thread Interrupted");
             }
 
-            return user.email;
+            return user.getEmail();
         }
 
         @Override
@@ -157,15 +166,32 @@ public class PasswordRecoveryActivity extends Activity {
      */
     private User getUsernameAndPassword() {
 
-        // TODO Query the database based on the username. Create the user object and return it
+        // Query the database based on the username. Create the user object and return it
 
 
-        return null;
+        String username = mUsername.getText().toString();
+        UserDBO userDBO = new UserDBO(PasswordRecoveryActivity.this);
+
+        if(userDBO.isExist(username)){
+            User user = userDBO.getByUsername(username);
+            userDBO.close();
+
+            return user;
+        }else{
+            userDBO.close();
+
+            return null;
+        }
+
     }
 
     /**
      * User class
      */
+
+    /* I have already made User class in models package, so I commendted this out
+    I copied the toString method to User class in model package
+
     private class User {
         private String username;
         private String password;
@@ -182,5 +208,6 @@ public class PasswordRecoveryActivity extends Activity {
             return "Username: " + username + "\nPassword: " + password;
         }
     }
+    */
 
 }

@@ -8,6 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import database.UserDBO;
+import models.User;
+
 public class MainActivity extends Activity {
     private static final int CREATE_ACCOUNT= 0;
     private static final int RECOVER_PASSWORD= 1;
@@ -96,10 +99,23 @@ public class MainActivity extends Activity {
             mStatus.setText(R.string.entry_missing);
             result= false;
         } else {
-            // TODO Authenticate this user by query the database. If the user does not exist
-            // TODO set mStatus text to R.string.invalid_user and result should be false.
-            // TODO result should be true
-            result= true;
+            // Authenticate this user by query the database. If the user does not exist
+            // set mStatus text to R.string.invalid_user and result should be false.
+            // result should be true
+
+            UserDBO userDBO = new UserDBO(MainActivity.this);
+
+            User user = userDBO.getByUsername(username);
+
+            if(user == null){
+
+                mStatus.setText(R.string.invalid_user);
+                result = false;
+            }else{
+                result = user.checkPassword(password) ? true : false;
+            }
+
+            userDBO.close();
         }
 
         return result;
