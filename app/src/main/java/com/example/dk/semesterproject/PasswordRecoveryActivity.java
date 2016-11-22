@@ -47,11 +47,12 @@ public class PasswordRecoveryActivity extends Activity {
         mSendPasswordButton= (Button) findViewById(R.id.emailButton);
         mPasswordRecoveryStatus= (TextView) findViewById(R.id.passwordRecoveryStatus);
         mUsername= (EditText) findViewById(R.id.username_recovery);
-        username= mUsername.getText().toString().trim();
 
         mSendPasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                username= mUsername.getText().toString().trim();
+
                 if (username.equals(""))
                     mPasswordRecoveryStatus.setText(R.string.entry_missing);
                 else {
@@ -166,9 +167,14 @@ public class PasswordRecoveryActivity extends Activity {
      */
     private User getUsernameAndPassword() {
 
-        // TODO Query the database based on the username. Create the user object and return it
-//        UserDBO userDBO = new UserDBO(PasswordRecoveryActivity.this);
-//        if(userDBO.isExist())
+        // Query the database based on the username. Create the user object and return it
+        UserDBO userDBO = new UserDBO(PasswordRecoveryActivity.this);
+        if(userDBO.isExist(username)){
+            User user = userDBO.getByUsername(username);
+            userDBO.close();
+
+            return user;
+        }
 
         return null;
     }
