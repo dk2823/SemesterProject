@@ -15,7 +15,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     // define database name and version
     private static final String DB_NAME = "saladBarDB.db";
-    private static final int DB_VERSION = 26;
+    private static final int DB_VERSION = 28;
 
     // define table name and columns
 

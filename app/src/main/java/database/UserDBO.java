@@ -63,7 +63,6 @@ public class UserDBO {
         cursorToCreate.moveToFirst();
         User newUser = cursorToUser(cursorToCreate);
         cursorToCreate.close();
-        cursorToCreate.close();
 
         return newUser;
 
@@ -77,6 +76,7 @@ public class UserDBO {
                     DBHelper.COLUMN_USER_USERNAME + " = ?",
                     new String[]{username}, null, null, null);
 
+            cursor.moveToFirst();
             User user = cursorToUser(cursor);
             cursor.close();
 

@@ -107,6 +107,8 @@ public class RegisterActivity extends Activity {
 
                     return SUCCESS;
                 }
+            }else{
+                return USERNAME_IN_USE;
             }
         }
         return ENTRY_MISSING;
