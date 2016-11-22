@@ -23,6 +23,9 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import database.UserDBO;
+import models.User;
+
 /**
  * Activity that allows the user to recover his/her password
  */
@@ -119,14 +122,14 @@ public class PasswordRecoveryActivity extends Activity {
                 });
                 message= new MimeMessage(session);
                 message.setFrom(new InternetAddress(FROM_EMAIL));
-                message.addRecipient(Message.RecipientType.TO, new InternetAddress(user.email));
+                message.addRecipient(Message.RecipientType.TO, new InternetAddress(user.getEmail()));
                 message.setSubject(mContext.getString(R.string.email_subject));
                 message.setContent(mContext.getString(R.string.email_body) + user +
                         mContext.getString(R.string.email_footer), PLAIN);
 
                 // Send the email
                 Thread.sleep(2000);
-                publishProgress("Sending email to " + user.email + "...");
+                publishProgress("Sending email to " + user.getEmail() + "...");
                 transport = session.getTransport("smtp");
                 transport.connect(EMAIL_HOST, FROM_EMAIL, PASSWORD);
                 transport.sendMessage(message, message.getAllRecipients());
@@ -144,7 +147,7 @@ public class PasswordRecoveryActivity extends Activity {
                 Log.e(TAG, "Thread Interrupted");
             }
 
-            return user.email;
+            return user.getEmail();
         }
 
         @Override
@@ -164,7 +167,8 @@ public class PasswordRecoveryActivity extends Activity {
     private User getUsernameAndPassword() {
 
         // TODO Query the database based on the username. Create the user object and return it
-
+//        UserDBO userDBO = new UserDBO(PasswordRecoveryActivity.this);
+//        if(userDBO.isExist())
 
         return null;
     }
@@ -172,6 +176,7 @@ public class PasswordRecoveryActivity extends Activity {
     /**
      * User class
      */
+    /*
     private class User {
         private String username;
         private String password;
@@ -188,5 +193,5 @@ public class PasswordRecoveryActivity extends Activity {
             return "Username: " + username + "\nPassword: " + password;
         }
     }
-
+    */
 }
