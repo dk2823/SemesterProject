@@ -44,7 +44,7 @@ public class OrderActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order);
 
-        Log.i(TAG, "I am here");
+        Log.i(TAG, "I am here now");
 
         mUsername= (TextView) findViewById(R.id.username_order);
         mViewPager= (ViewPager) findViewById(R.id.pager_view);
