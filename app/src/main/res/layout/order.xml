@@ -4,6 +4,7 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/main_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background">
@@ -68,8 +69,18 @@
             android:layout_height="150dp"
             android:layout_below="@id/restaurant_selector"
             android:layout_marginTop="20dp"
-            android:layout_centerHorizontal="true"
+            android:paddingLeft="10dp"
+            android:layout_alignParentLeft="true"
             android:src="@drawable/plate"/>
+
+        <ListView
+            android:id="@+id/ingredients_list"
+            android:layout_below="@id/restaurant_selector"
+            android:layout_toRightOf="@id/salad_order"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="30dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"/>
 
         <RelativeLayout
             android:id="@+id/ingredients_layout"
