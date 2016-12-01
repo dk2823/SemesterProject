@@ -43,10 +43,6 @@ public class IngredientsAdapter extends PagerAdapter {
         mFrame= frame;
     }
 
-    public int getItemResID(int position) {
-        return items.get(position).id;
-    }
-
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         // Get the layout for a specific item
@@ -66,9 +62,18 @@ public class IngredientsAdapter extends PagerAdapter {
             @Override
             public void onClick(View v) {
                 IngredientPlacement place= new IngredientPlacement(mContext,mFrame);
-                place.addIngredient(TOMATO);
                 place.addIngredient(BANANA_PEPPERS);
+                place.addIngredient(TOMATO);
                 place.addIngredient(LETTUCE);
+                place.addIngredient(BLACK_OLIVES);
+                place.addIngredient(CARROT);
+                place.addIngredient(CUCUMBERS);
+                place.addIngredient(CROUTONS);
+                place.addIngredient(GRAPES);
+                place.addIngredient(ONIONS);
+                place.addIngredient(STRAWBERRY);
+                place.addIngredient(CHEESE);
+                place.addIngredient(CHICKEN);
             }
         });
 
@@ -102,6 +107,7 @@ public class IngredientsAdapter extends PagerAdapter {
         items.add(new Item(R.drawable.shredded_cheese, CHEESE));
         items.add(new Item(R.drawable.strawberry, STRAWBERRY));
         items.add(new Item(R.drawable.tomatoes, TOMATO));
+        items.add(new Item(R.drawable.chicken, CHICKEN));
     }
 
     @Override
