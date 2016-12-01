@@ -19,6 +19,7 @@ public class OrderConfirmActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.confirmation_page);
 
+
         mOrderBtn = (Button) findViewById(R.id.button_order);
         mOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,20 +31,14 @@ public class OrderConfirmActivity extends Activity {
             }
         });
 
-        mList = (ListView) findViewById(R.id.sampleListView);
 
-        String[] testStrArr = new String[5];
-        testStrArr[0]= "Hello";
-        testStrArr[1] = "test";
+//        String[] testStrArr = {"hello", "test", "sick", "nasty"};
 
-        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_order_confirm_listview, testStrArr);
-
-        // Second argument will be layout defined in XML file and having TextView for each string in the array.
-
-        // Final argument is an array of strings which will be populated in the text view
+//        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_order_confirm_listview, testStrArr);
 
 
-        mList.setAdapter(adapter);
+//        mList = (ListView) findViewById(R.id.sampleListView);
+//        mList.setAdapter(adapter);
     }
 
 }
