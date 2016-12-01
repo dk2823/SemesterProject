@@ -3,9 +3,7 @@ package com.example.dk.semesterproject;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.view.View;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -20,48 +18,50 @@ import java.util.TreeMap;
  */
 
 public class IngredientPlacement {
+    private static final String TAG= "IngredientPlacement";
 
     private Map<String, Integer> items;
     private Queue<String> toAdd;
     private Stack<String> plateStack;
     private Context mContext;
-    private int mXCenter;
-    private int mYCenter;
-    private int mXStart;
-    private int mYStart;
-    private int mWidth;
-    private int mHeight;
-    private int mRadius;
     private RelativeLayout mFrame;
+    private int mFrameWidth;
+    private int mFrameHeight;
     private Bitmap lettuceBitmap;
+    private Bitmap tomatoBitmap;
+    private Bitmap bananaPepperBitmap;
 
     /*
      * Initializes toAdd and items. Populate items;
      */
-    public IngredientPlacement(Context c, ImageView plate, RelativeLayout parent) {
+    public IngredientPlacement(Context c, RelativeLayout parent) {
         mContext= c;
         toAdd= new LinkedList<>();
         plateStack= new Stack<>();
         items= new TreeMap<>();
         populate();
         mFrame= parent;
-        mXStart= plate.getLeft();
-        mYStart= plate.getTop();
-        mWidth= plate.getWidth();
-        mHeight= plate.getHeight();
 
-        // Get the center of the plate
-        mXCenter= (mXStart+mWidth)/2;
-        mYCenter= (mYStart+mHeight)/2;
-
-        // Get the radius of the plate
-        mRadius= mYCenter-mYStart;
+        mFrameWidth= mFrame.getWidth();
+        mFrameHeight= mFrame.getHeight();
 
         // Create a scaled lettuce Bitmap
         Bitmap tempBitmap= BitmapFactory.decodeResource(mContext.getResources(),
                 R.drawable.single_leaf);
-        lettuceBitmap= Bitmap.createScaledBitmap(tempBitmap,mWidth/2,mHeight/2,false);
+        lettuceBitmap= Bitmap.createScaledBitmap(tempBitmap,mFrameWidth/2,
+                mFrameHeight/2,false);
 
+        // Create a scaled tomato bitmap
+        tempBitmap= BitmapFactory.decodeResource(mContext.getResources(),
+                R.drawable.single_tomato);
+        tomatoBitmap= Bitmap.createScaledBitmap(tempBitmap,mFrameWidth/4,
+                mFrameHeight/6,false);
+
+        // Create a scaled banana pepper bitmap
+        tempBitmap= BitmapFactory.decodeResource(mContext.getResources(),
+                R.drawable.single_banana_pepper);
+        bananaPepperBitmap= Bitmap.createScaledBitmap(tempBitmap,mFrameWidth/5,
+                mFrameHeight/6,false);
     }
 
     /*
@@ -97,18 +97,24 @@ public class IngredientPlacement {
             case IngredientsAdapter.LETTUCE:
                 plateStack.push(IngredientsAdapter.LETTUCE);
                 for (int i= 0; i<360; i+= 45) {
-                    // Convert to radians and add pi/2
-                    double angle= Math.PI*i/180+Math.PI/2;
-
-                    // Calculate the coordinates of the lettuce
-                    int x= (int) (mRadius * Math.cos(angle));
-                    int y= (int) (mRadius * Math.sin(angle));
-                    x= mXCenter-x;
-                    y= mYCenter-y;
-
-                    Lettuce lettuce= new Lettuce(i,x,y);
+                    Lettuce lettuce = new Lettuce(i);
                     mFrame.addView(lettuce);
-                    lettuce.invalidate();
+                }
+                break;
+
+            case IngredientsAdapter.TOMATO:
+                plateStack.push(IngredientsAdapter.TOMATO);
+                for (int i= 0; i<360; i+= 60) {
+                    Tomato tomato = new Tomato(i);
+                    mFrame.addView(tomato);
+                }
+                break;
+
+            case IngredientsAdapter.BANANA_PEPPERS:
+                plateStack.push(IngredientsAdapter.BANANA_PEPPERS);
+                for (int i= 0; i<360; i+= 90) {
+                    BananaPepper bp = new BananaPepper(i);
+                    mFrame.addView(bp);
                 }
                 break;
         }
@@ -117,27 +123,53 @@ public class IngredientPlacement {
     /*
      * Lettuce class
      */
-    private class Lettuce extends View {
-        private float rotation;
-        private int xPos;
-        private int yPos;
-        private Paint paint;
-
-        public Lettuce(float r, int x, int y) {
+    private class Lettuce extends ImageView {
+        public Lettuce(int rotation) {
             super(mContext);
-            rotation= r;
-            xPos= x;
-            yPos= y;
-            paint= new Paint();
-            paint.setAntiAlias(true);
+            setImageBitmap(lettuceBitmap);
+            setPivotX(130f);
+            setPivotY(300f);
+            setRotation(rotation);
+            RelativeLayout.LayoutParams params=
+                    new RelativeLayout.LayoutParams(mFrameWidth/2, mFrameHeight/2);
+            params.setMarginStart(mFrameWidth/4);
+            setLayoutParams(params);
         }
 
-        @Override
-        protected void onDraw(Canvas canvas) {
-            canvas.save();
-            canvas.rotate(rotation,(float)xPos, (float)yPos);
-            canvas.drawBitmap(lettuceBitmap, xPos,yPos, paint);
-            canvas.restore();
+    }
+
+    /*
+     * Tomato class
+     */
+    private class Tomato extends ImageView {
+        public Tomato(int rotation) {
+            super(mContext);
+            setImageBitmap(tomatoBitmap);
+            setPivotX(80f);
+            setPivotY(200f);
+            RelativeLayout.LayoutParams params=
+                    new RelativeLayout.LayoutParams(mFrameWidth/4, mFrameHeight/6);
+            params.setMargins(mFrameWidth/3, mFrameHeight/6, 0, 0);
+            setLayoutParams(params);
+            setRotation(rotation);
+        }
+    }
+
+    /*
+     * Banana peppers class
+     */
+
+    private class BananaPepper extends ImageView {
+        public BananaPepper(int rotation) {
+            super(mContext);
+            setImageBitmap(bananaPepperBitmap);
+            setPivotX(60f);
+            setPivotY(260f);
+            RelativeLayout.LayoutParams params=
+                    new RelativeLayout.LayoutParams(mFrameWidth/5, mFrameHeight/6);
+            params.setMargins(mFrameWidth/3, mFrameHeight/14, 0, 0);
+            setLayoutParams(params);
+            setRotation(rotation);
         }
     }
 

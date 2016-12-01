@@ -3,20 +3,14 @@ package com.example.dk.semesterproject;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -49,9 +43,8 @@ public class OrderActivity extends Activity {
         mUsername= (TextView) findViewById(R.id.username_order);
         mViewPager= (ViewPager) findViewById(R.id.pager_view);
         mSpinner= (Spinner) findViewById(R.id.restaurant_chooser);
-        mFrame= (RelativeLayout) findViewById(R.id.main_layout);
+        mFrame= (RelativeLayout) findViewById(R.id.salad_order);
 
-        mIngredientsAdapter= new IngredientsAdapter(this, mFrame);
         mSpinnerAdapter= ArrayAdapter.createFromResource(getApplicationContext(),
                 R.array.restaurants, R.layout.spinner_item);
         mSpinnerAdapter.setDropDownViewResource(R.layout.spinner_item);
@@ -67,16 +60,11 @@ public class OrderActivity extends Activity {
                 // TODO
             }
         });
-
-
-
-
         // Retrieve the username from the intent and set the username
         String username= getIntent().getExtras().getString(MainActivity.USERNAME);
         mUsername.setText(username);
 
         // Set the adapters for the view pager and the spinner
-        mViewPager.setAdapter(mIngredientsAdapter);
         mSpinner.setAdapter(mSpinnerAdapter);
 
         // Show the user how to use the app via an AlertDialog
@@ -92,13 +80,23 @@ public class OrderActivity extends Activity {
 
         mAlertDialog= builder.create();
         mAlertDialog.setTitle("Order Hints");
+        mAlertDialog.show();
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mAlertDialog.show();
+
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            mIngredientsAdapter= new IngredientsAdapter(this, mFrame);
+            mViewPager.setAdapter(mIngredientsAdapter);
+        }
     }
 
     @Override
@@ -112,34 +110,4 @@ public class OrderActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-
-    /*
-     * Private class View that redraws the image selected
-     */
-    private class ImageSelected extends View {
-        private Bitmap mBitmap;
-        private float xPos;
-        private float yPos;
-        private Paint paint;
-
-        public ImageSelected(int res) {
-            super(OrderActivity.this);
-            Bitmap bitmap= BitmapFactory.decodeResource(OrderActivity.this.getResources(), res);
-            mBitmap= Bitmap.createScaledBitmap(bitmap,70,60,false);
-            paint= new Paint();
-        }
-
-        public void set(float x, float y) {
-            xPos= x;
-            yPos= y;
-        }
-
-        @Override
-        protected void onDraw(Canvas canvas) {
-            canvas.save();
-            float x= xPos-35;
-            float y= yPos-30;
-            canvas.drawBitmap(mBitmap, x, y, paint);
-        }
-    }
 }

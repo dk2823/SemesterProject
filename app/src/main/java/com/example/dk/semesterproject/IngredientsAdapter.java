@@ -65,7 +65,10 @@ public class IngredientsAdapter extends PagerAdapter {
         itemImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i(TAG, "HEYHEYEHYEHHEYEHEHEHHEYEHEHEHEHEHE");
+                IngredientPlacement place= new IngredientPlacement(mContext,mFrame);
+                place.addIngredient(TOMATO);
+                place.addIngredient(BANANA_PEPPERS);
+                place.addIngredient(LETTUCE);
             }
         });
 

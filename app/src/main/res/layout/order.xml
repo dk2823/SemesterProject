@@ -63,15 +63,21 @@
             android:layout_marginLeft="10dp"
             android:paddingTop="15dp" />
 
-        <ImageView
+        <RelativeLayout
             android:id="@+id/salad_order"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_below="@id/restaurant_selector"
             android:layout_marginTop="20dp"
             android:paddingLeft="10dp"
             android:layout_alignParentLeft="true"
-            android:src="@drawable/plate"/>
+            android:layout_below="@id/restaurant_selector">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/plate"/>
+
+        </RelativeLayout>
 
         <ListView
             android:id="@+id/ingredients_list"
