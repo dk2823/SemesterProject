@@ -3,6 +3,7 @@ package com.example.dk.semesterproject;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -32,11 +34,25 @@ public class OrderActivity extends Activity {
     private RelativeLayout mFrame;
     private ArrayAdapter<CharSequence> mSpinnerAdapter;
     private AlertDialog mAlertDialog;
+    private Button mPlaceOrderBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order);
+
+        mPlaceOrderBtn = (Button) findViewById(R.id.button_order);
+        mPlaceOrderBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(OrderActivity.this, OrderConfirmActivity.class);
+                //intent.putExtra(USERNAME, mUsername.getText().toString().trim());
+                startActivity(intent);
+
+            }
+        });
+
+
 
         Log.i(TAG, "I am here now");
 
