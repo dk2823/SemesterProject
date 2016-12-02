@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -23,6 +24,10 @@ import android.widget.TextView;
  */
 
 public class OrderActivity extends Activity {
+    public static final String USERNAME= "username";
+    public static final String RESTAURANT= "restaurant";
+    public static final String INGREDIENTS= "Ingredients";
+
     private static final String TAG= "OrderActivity";
 
     private TextView mUsername;
@@ -35,28 +40,30 @@ public class OrderActivity extends Activity {
     private ArrayAdapter<CharSequence> mSpinnerAdapter;
     private AlertDialog mAlertDialog;
     private Button mPlaceOrderBtn;
+    private RadioButton mSmallRadioButton;
+    private RadioButton mMediumRadioButton;
+    private RadioButton mLargeRadioButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order);
 
-        mPlaceOrderBtn = (Button) findViewById(R.id.button_order);
-        mPlaceOrderBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent= new Intent(OrderActivity.this, OrderConfirmActivity.class);
-                //intent.putExtra(USERNAME, mUsername.getText().toString().trim());
-                startActivity(intent);
-
-            }
-        });
-
         mListView= (ListView) findViewById(R.id.ingredients_list);
         mUsername= (TextView) findViewById(R.id.username_order);
         mViewPager= (ViewPager) findViewById(R.id.pager_view);
         mSpinner= (Spinner) findViewById(R.id.restaurant_chooser);
         mFrame= (RelativeLayout) findViewById(R.id.salad_order);
+        mSmallRadioButton= (RadioButton) findViewById(R.id.radio_small);
+        mMediumRadioButton= (RadioButton) findViewById(R.id.radio_medium);
+        mLargeRadioButton= (RadioButton) findViewById(R.id.radio_large);
+
+        // Retrieve the username from the intent and set the username
+        String username= getIntent().getExtras().getString(MainActivity.USERNAME);
+        mUsername.setText(username);
+
+        final Intent intent= new Intent(this, OrderConfirmActivity.class);
+        intent.putExtra(USERNAME, username);
 
         mListviewAdapter= new ListviewAdapter(getApplicationContext());
         mSpinnerAdapter= ArrayAdapter.createFromResource(getApplicationContext(),
@@ -66,12 +73,12 @@ public class OrderActivity extends Activity {
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // TODO
+                intent.putExtra(RESTAURANT, mSpinnerAdapter.getItem(position));
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                // TODO
+                // Nothing
             }
         });
 
@@ -79,10 +86,6 @@ public class OrderActivity extends Activity {
         mListView.setAdapter(mListviewAdapter);
         mIngredientsAdapter= new IngredientsAdapter(this, mListviewAdapter, mFrame);
         mViewPager.setAdapter(mIngredientsAdapter);
-
-        // Retrieve the username from the intent and set the username
-        String username= getIntent().getExtras().getString(MainActivity.USERNAME);
-        mUsername.setText(username);
 
         // Show the user how to use the app via an AlertDialog
         AlertDialog.Builder builder= new AlertDialog.Builder(this);
@@ -128,7 +131,14 @@ public class OrderActivity extends Activity {
             }
         });
 
-
+        mPlaceOrderBtn = (Button) findViewById(R.id.button_order);
+        mPlaceOrderBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListviewAdapter.packageIntent(intent);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

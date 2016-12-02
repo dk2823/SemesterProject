@@ -1,6 +1,7 @@
 package com.example.dk.semesterproject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,10 @@ public class ListviewAdapter extends BaseAdapter {
     public void add(String ingredient) {
         ingredientsList.add(ingredient);
         notifyDataSetChanged();
+    }
+
+    public void packageIntent(Intent intent) {
+        intent.putExtra(OrderActivity.INGREDIENTS, new ArrayList<String>(ingredientsList));
     }
 
     public void remove(String ingredient) {
