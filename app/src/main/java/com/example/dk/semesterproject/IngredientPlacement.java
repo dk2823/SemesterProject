@@ -3,6 +3,7 @@ package com.example.dk.semesterproject;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -227,8 +228,9 @@ public class IngredientPlacement {
                 croutons[2]= new Crouton(mFrameWidth/3*2, mFrameHeight/4);
                 croutons[3]= new Crouton(mFrameWidth/4, mFrameHeight/2);
                 croutons[4]= new Crouton(mFrameWidth/24*11, mFrameHeight/3*2);
-                for (int i= 0; i<croutons.length; i++)
+                for (int i= 0; i<croutons.length; i++) {
                     mFrame.addView(croutons[i]);
+                }
                 break;
 
             case IngredientsAdapter.GRAPES:
@@ -237,8 +239,9 @@ public class IngredientPlacement {
                 grapes[0]= new Grape(mFrameWidth/6, mFrameHeight/9*4);
                 grapes[1]= new Grape(mFrameWidth/24*11, mFrameHeight/7*4);
                 grapes[2]= new Grape(mFrameWidth/10*7, mFrameHeight/9*4);
-                for (int i=0; i<grapes.length; i++)
+                for (int i=0; i<grapes.length; i++) {
                     mFrame.addView(grapes[i]);
+                }
                 break;
 
             case IngredientsAdapter.ONIONS:
@@ -255,8 +258,9 @@ public class IngredientPlacement {
                 strawberries[0]= new Strawberry(mFrameWidth/2, mFrameHeight/4);
                 strawberries[1]= new Strawberry(mFrameWidth/10*3, mFrameHeight/4);
                 strawberries[2]= new Strawberry(mFrameWidth/5*2, mFrameHeight/5*2);
-                for (int i=0; i<strawberries.length; i++)
+                for (int i=0; i<strawberries.length; i++) {
                     mFrame.addView(strawberries[i]);
+                }
                 break;
 
             case IngredientsAdapter.CHEESE:
@@ -271,8 +275,9 @@ public class IngredientPlacement {
                 cheese[6]= new Cheese(mFrameWidth/6, mFrameHeight/2);
                 cheese[7]= new Cheese(mFrameWidth/3, mFrameHeight/2);
                 cheese[8]= new Cheese(mFrameWidth/2, mFrameHeight/2);
-                for (int i=0; i<cheese.length; i++)
+                for (int i=0; i<cheese.length; i++) {
                     mFrame.addView(cheese[i]);
+                }
                 break;
 
             default:

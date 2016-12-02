@@ -21,6 +21,7 @@ public class IngredientsAdapter extends PagerAdapter {
     private Context mContext;
     private ArrayList<Item> items;
     private RelativeLayout mFrame;
+    private IngredientPlacement ingredientPlacement;
 
     public static final String BANANA_PEPPERS= "Banana Peppers";
     public static final String BLACK_OLIVES= "Black Olives";
@@ -41,6 +42,7 @@ public class IngredientsAdapter extends PagerAdapter {
         items= new ArrayList<>();
         init(items);
         mFrame= frame;
+        ingredientPlacement= new IngredientPlacement(context,frame);
     }
 
     @Override
@@ -52,7 +54,7 @@ public class IngredientsAdapter extends PagerAdapter {
         // Retrieve the ImageView and the textView and add the layout to the container
         ImageView itemImage= (ImageView) linearLayout.findViewById(R.id.item);
         TextView itemName= (TextView) linearLayout.findViewById(R.id.item_name);
-        Item it= items.get(position);
+        final Item it= items.get(position);
 
         itemImage.setImageResource(it.id);
         itemName.setText(it.name);
@@ -61,19 +63,21 @@ public class IngredientsAdapter extends PagerAdapter {
         itemImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IngredientPlacement place= new IngredientPlacement(mContext,mFrame);
-                place.addIngredient(BANANA_PEPPERS);
-                place.addIngredient(TOMATO);
-                place.addIngredient(LETTUCE);
-                place.addIngredient(BLACK_OLIVES);
-                place.addIngredient(CARROT);
-                place.addIngredient(CUCUMBERS);
-                place.addIngredient(CROUTONS);
-                place.addIngredient(GRAPES);
-                place.addIngredient(ONIONS);
-                place.addIngredient(STRAWBERRY);
-                place.addIngredient(CHEESE);
-                place.addIngredient(CHICKEN);
+
+                switch (it.name) {
+                    case BANANA_PEPPERS: ingredientPlacement.addIngredient(BANANA_PEPPERS); break;
+                    case TOMATO: ingredientPlacement.addIngredient(TOMATO); break;
+                    case LETTUCE: ingredientPlacement.addIngredient(LETTUCE); break;
+                    case BLACK_OLIVES: ingredientPlacement.addIngredient(BLACK_OLIVES); break;
+                    case CARROT: ingredientPlacement.addIngredient(CARROT); break;
+                    case CUCUMBERS: ingredientPlacement.addIngredient(CUCUMBERS); break;
+                    case CROUTONS: ingredientPlacement.addIngredient(CROUTONS); break;
+                    case GRAPES: ingredientPlacement.addIngredient(GRAPES); break;
+                    case ONIONS: ingredientPlacement.addIngredient(ONIONS); break;
+                    case STRAWBERRY: ingredientPlacement.addIngredient(STRAWBERRY); break;
+                    case CHEESE: ingredientPlacement.addIngredient(CHEESE); break;
+                    default: ingredientPlacement.addIngredient(CHICKEN);
+                }
             }
         });
 
