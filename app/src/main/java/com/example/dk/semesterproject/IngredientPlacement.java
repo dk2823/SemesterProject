@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -45,13 +46,20 @@ public class IngredientPlacement {
     /*
      * Initializes toAdd and items. Populate items;
      */
-    public IngredientPlacement(Context c, RelativeLayout parent) {
+    public IngredientPlacement(Context c) {
         mContext= c;
         toAdd= new LinkedList<>();
         plateStack= new Stack<>();
         items= new TreeMap<>();
         populate();
-        mFrame= parent;
+
+    }
+
+    /*
+     * Sets all the bitmap. Needs to be called before addIngredient is called
+     */
+    public void setUp(RelativeLayout frame) {
+        mFrame= frame;
 
         mFrameWidth= mFrame.getWidth();
         mFrameHeight= mFrame.getHeight();
@@ -286,6 +294,122 @@ public class IngredientPlacement {
                 mFrame.addView(chicken);
         }
     }
+
+    /*
+     * Removes an ingredient from the list
+     */
+    public void remove(String ingredient) {
+        switch (ingredient) {
+            case IngredientsAdapter.BANANA_PEPPERS:
+                for (int i=0; i<mFrame.getChildCount(); i++) {
+                    View v= mFrame.getChildAt(i);
+                    if (v instanceof BananaPepper)
+                        mFrame.removeView(v);
+                }
+                plateStack.remove(IngredientsAdapter.BANANA_PEPPERS);
+                break;
+
+            case IngredientsAdapter.BLACK_OLIVES:
+                for (int i=0; i<mFrame.getChildCount(); i++) {
+                    View v= mFrame.getChildAt(i);
+                    if (v instanceof Olive)
+                        mFrame.removeView(v);
+                }
+                plateStack.remove(IngredientsAdapter.BLACK_OLIVES);
+                break;
+
+            case IngredientsAdapter.CARROT:
+                for (int i=0; i<mFrame.getChildCount(); i++) {
+                    View v= mFrame.getChildAt(i);
+                    if (v instanceof Carrot)
+                        mFrame.removeView(v);
+                }
+                plateStack.remove(IngredientsAdapter.CARROT);
+                break;
+
+            case IngredientsAdapter.CUCUMBERS:
+                for (int i=0; i<mFrame.getChildCount(); i++) {
+                    View v= mFrame.getChildAt(i);
+                    if (v instanceof Cucumber) {
+                        mFrame.removeView(v);
+                    }
+                }
+                plateStack.remove(IngredientsAdapter.CUCUMBERS);
+                break;
+
+            case IngredientsAdapter.CROUTONS:
+                for (int i=0; i<mFrame.getChildCount(); i++) {
+                    View v= mFrame.getChildAt(i);
+                    if (v instanceof Crouton)
+                        mFrame.removeView(v);
+                }
+                plateStack.remove(IngredientsAdapter.CROUTONS);
+                break;
+
+            case IngredientsAdapter.GRAPES:
+                for (int i=0; i<mFrame.getChildCount(); i++) {
+                    View v= mFrame.getChildAt(i);
+                    if (v instanceof Grape)
+                        mFrame.removeView(v);
+                }
+                plateStack.remove(IngredientsAdapter.GRAPES);
+                break;
+
+            case IngredientsAdapter.ONIONS:
+                for (int i=0; i<mFrame.getChildCount(); i++) {
+                    View v= mFrame.getChildAt(i);
+                    if (v instanceof Onion)
+                        mFrame.removeView(v);
+                }
+                plateStack.remove(IngredientsAdapter.ONIONS);
+                break;
+
+            case IngredientsAdapter.LETTUCE:
+                for (int i=0; i<mFrame.getChildCount(); i++) {
+                    View v= mFrame.getChildAt(i);
+                    if (v instanceof Lettuce)
+                        mFrame.removeView(v);
+                }
+                plateStack.remove(IngredientsAdapter.LETTUCE);
+                break;
+
+            case IngredientsAdapter.CHEESE:
+                for (int i=0; i<mFrame.getChildCount(); i++) {
+                    View v= mFrame.getChildAt(i);
+                    if (v instanceof Cheese)
+                        mFrame.removeView(v);
+                }
+                plateStack.remove(IngredientsAdapter.CHEESE);
+                break;
+
+            case IngredientsAdapter.STRAWBERRY:
+                for (int i=0; i<mFrame.getChildCount(); i++) {
+                    View v= mFrame.getChildAt(i);
+                    if (v instanceof Strawberry)
+                        mFrame.removeView(v);
+                }
+                plateStack.remove(IngredientsAdapter.STRAWBERRY);
+                break;
+
+            case IngredientsAdapter.TOMATO:
+                for (int i=0; i<mFrame.getChildCount(); i++) {
+                    View v= mFrame.getChildAt(i);
+                    if (v instanceof Tomato)
+                        mFrame.removeView(v);
+                }
+                plateStack.remove(IngredientsAdapter.TOMATO);
+                break;
+
+            default:
+                for (int i=0; i<mFrame.getChildCount(); i++) {
+                    View v= mFrame.getChildAt(i);
+                    if (v instanceof Chicken)
+                        mFrame.removeView(v);
+                }
+                plateStack.remove(IngredientsAdapter.CHICKEN);
+        }
+    }
+
 
     /*
      * Lettuce class

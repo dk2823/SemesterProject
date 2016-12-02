@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -22,14 +23,13 @@ import android.widget.TextView;
  */
 
 public class OrderActivity extends Activity {
-    private static final int SMALL= 10;
-    private static final int MEDIUM= 15;
-    private static final int LARGE= 20;
     private static final String TAG= "OrderActivity";
 
     private TextView mUsername;
     private ViewPager mViewPager;
     private IngredientsAdapter mIngredientsAdapter;
+    private ListviewAdapter mListviewAdapter;
+    private ListView mListView;
     private Spinner mSpinner;
     private RelativeLayout mFrame;
     private ArrayAdapter<CharSequence> mSpinnerAdapter;
@@ -52,15 +52,13 @@ public class OrderActivity extends Activity {
             }
         });
 
-
-
-        Log.i(TAG, "I am here now");
-
+        mListView= (ListView) findViewById(R.id.ingredients_list);
         mUsername= (TextView) findViewById(R.id.username_order);
         mViewPager= (ViewPager) findViewById(R.id.pager_view);
         mSpinner= (Spinner) findViewById(R.id.restaurant_chooser);
         mFrame= (RelativeLayout) findViewById(R.id.salad_order);
 
+        mListviewAdapter= new ListviewAdapter(getApplicationContext());
         mSpinnerAdapter= ArrayAdapter.createFromResource(getApplicationContext(),
                 R.array.restaurants, R.layout.spinner_item);
         mSpinnerAdapter.setDropDownViewResource(R.layout.spinner_item);
@@ -76,12 +74,15 @@ public class OrderActivity extends Activity {
                 // TODO
             }
         });
+
+        mSpinner.setAdapter(mSpinnerAdapter);
+        mListView.setAdapter(mListviewAdapter);
+        mIngredientsAdapter= new IngredientsAdapter(this, mListviewAdapter, mFrame);
+        mViewPager.setAdapter(mIngredientsAdapter);
+
         // Retrieve the username from the intent and set the username
         String username= getIntent().getExtras().getString(MainActivity.USERNAME);
         mUsername.setText(username);
-
-        // Set the adapters for the view pager and the spinner
-        mSpinner.setAdapter(mSpinnerAdapter);
 
         // Show the user how to use the app via an AlertDialog
         AlertDialog.Builder builder= new AlertDialog.Builder(this);
@@ -96,23 +97,44 @@ public class OrderActivity extends Activity {
 
         mAlertDialog= builder.create();
         mAlertDialog.setTitle("Order Hints");
-        mAlertDialog.show();
+
+        // Attach a listener to the listView. If an item is clicked then the user is prompted
+        // to a message asking for a removal of an ingredrient. If the user clicks on yes then
+        // the item is removed
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position,
+                                    long id) {
+                AlertDialog.Builder b= new AlertDialog.Builder(OrderActivity.this);
+                b.setCancelable(false)
+                        .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String ingredient= (String) mListviewAdapter.getItem(position);
+                                mIngredientsAdapter.remove(ingredient);
+                                dialog.cancel();
+                            }
+                        })
+                        .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .setMessage(R.string.remove_item);
+                AlertDialog ad= b.create();
+                ad.setTitle("Remove?");
+                ad.show();
+            }
+        });
+
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-    }
-
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-            mIngredientsAdapter= new IngredientsAdapter(this, mFrame);
-            mViewPager.setAdapter(mIngredientsAdapter);
-        }
+        mAlertDialog.show();
     }
 
     @Override

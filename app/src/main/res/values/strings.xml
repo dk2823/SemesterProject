@@ -32,6 +32,9 @@
         onto the plate. The list of the selected items will be listed of the plate. Click on an item
         to remove it from the salad...
     </string>
+    <string name="remove_item">
+        Would you like to remove the item selected?
+    </string>
     <string-array name="restaurants">
         <item>House</item>
         <item>Panera Bread</item>

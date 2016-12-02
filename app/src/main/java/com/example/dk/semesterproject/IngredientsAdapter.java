@@ -22,27 +22,34 @@ public class IngredientsAdapter extends PagerAdapter {
     private ArrayList<Item> items;
     private RelativeLayout mFrame;
     private IngredientPlacement ingredientPlacement;
+    private ListviewAdapter mListviewAdapter;
 
     public static final String BANANA_PEPPERS= "Banana Peppers";
     public static final String BLACK_OLIVES= "Black Olives";
-    public static final String CARROT= "carrot";
-    public static final String CUCUMBERS= "cucumbers";
+    public static final String CARROT= "Carrot";
+    public static final String CUCUMBERS= "Cucumbers";
     public static final String CROUTONS= "Garlic Croutons";
     public static final String GRAPES= "Red Grapes";
     public static final String ONIONS= "Onions";
-    public static final String LETTUCE= "lettuce";
+    public static final String LETTUCE= "Lettuce";
     public static final String CHEESE= "Three Cheese";
     public static final String STRAWBERRY= "Strawberries";
     public static final String TOMATO= "Tomatoes";
     public static final String CHICKEN= "Chicken";
     public static final String TAG= "IngredientsAdapter";
 
-    public IngredientsAdapter(Context context, RelativeLayout frame) {
+    public IngredientsAdapter(Context context, ListviewAdapter adapter, RelativeLayout frame) {
         mContext= context;
         items= new ArrayList<>();
         init(items);
+        ingredientPlacement= new IngredientPlacement(context);
+        mListviewAdapter= adapter;
         mFrame= frame;
-        ingredientPlacement= new IngredientPlacement(context,frame);
+    }
+
+    public void remove(String ingredient) {
+        ingredientPlacement.remove(ingredient);
+        mListviewAdapter.remove(ingredient);
     }
 
     @Override
@@ -63,20 +70,55 @@ public class IngredientsAdapter extends PagerAdapter {
         itemImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                ingredientPlacement.setUp(mFrame);
                 switch (it.name) {
-                    case BANANA_PEPPERS: ingredientPlacement.addIngredient(BANANA_PEPPERS); break;
-                    case TOMATO: ingredientPlacement.addIngredient(TOMATO); break;
-                    case LETTUCE: ingredientPlacement.addIngredient(LETTUCE); break;
-                    case BLACK_OLIVES: ingredientPlacement.addIngredient(BLACK_OLIVES); break;
-                    case CARROT: ingredientPlacement.addIngredient(CARROT); break;
-                    case CUCUMBERS: ingredientPlacement.addIngredient(CUCUMBERS); break;
-                    case CROUTONS: ingredientPlacement.addIngredient(CROUTONS); break;
-                    case GRAPES: ingredientPlacement.addIngredient(GRAPES); break;
-                    case ONIONS: ingredientPlacement.addIngredient(ONIONS); break;
-                    case STRAWBERRY: ingredientPlacement.addIngredient(STRAWBERRY); break;
-                    case CHEESE: ingredientPlacement.addIngredient(CHEESE); break;
-                    default: ingredientPlacement.addIngredient(CHICKEN);
+                    case BANANA_PEPPERS:
+                        if (ingredientPlacement.addIngredient(BANANA_PEPPERS))
+                            mListviewAdapter.add(BANANA_PEPPERS);
+                        break;
+                    case TOMATO:
+                        if (ingredientPlacement.addIngredient(TOMATO))
+                            mListviewAdapter.add(TOMATO);
+                        break;
+                    case LETTUCE:
+                        if (ingredientPlacement.addIngredient(LETTUCE))
+                            mListviewAdapter.add(LETTUCE);
+                        break;
+                    case BLACK_OLIVES:
+                        if (ingredientPlacement.addIngredient(BLACK_OLIVES))
+                            mListviewAdapter.add(BLACK_OLIVES);
+                        break;
+                    case CARROT:
+                        if (ingredientPlacement.addIngredient(CARROT))
+                            mListviewAdapter.add(CARROT);
+                        break;
+                    case CUCUMBERS:
+                        if (ingredientPlacement.addIngredient(CUCUMBERS))
+                            mListviewAdapter.add(CUCUMBERS);
+                        break;
+                    case CROUTONS:
+                        if (ingredientPlacement.addIngredient(CROUTONS))
+                            mListviewAdapter.add(CROUTONS);
+                        break;
+                    case GRAPES:
+                        if (ingredientPlacement.addIngredient(GRAPES))
+                            mListviewAdapter.add(GRAPES);
+                        break;
+                    case ONIONS:
+                        if (ingredientPlacement.addIngredient(ONIONS))
+                            mListviewAdapter.add(ONIONS);
+                        break;
+                    case STRAWBERRY:
+                        if (ingredientPlacement.addIngredient(STRAWBERRY))
+                            mListviewAdapter.add(STRAWBERRY);
+                        break;
+                    case CHEESE:
+                        if (ingredientPlacement.addIngredient(CHEESE))
+                            mListviewAdapter.add(CHEESE);
+                        break;
+                    default:
+                        if (ingredientPlacement.addIngredient(CHICKEN))
+                            mListviewAdapter.add(CHICKEN);
                 }
             }
         });
