@@ -20,7 +20,7 @@ public class OrderConfirmActivity extends Activity {
         setContentView(R.layout.confirmation_page);
 
 
-        mOrderBtn = (Button) findViewById(R.id.button_order);
+        mOrderBtn = (Button) findViewById(R.id.backButton);
         mOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

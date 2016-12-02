@@ -40,9 +40,9 @@ public class OrderActivity extends Activity {
     private ArrayAdapter<CharSequence> mSpinnerAdapter;
     private AlertDialog mAlertDialog;
     private Button mPlaceOrderBtn;
-    private RadioButton mSmallRadioButton;
-    private RadioButton mMediumRadioButton;
-    private RadioButton mLargeRadioButton;
+    //private RadioButton mSmallRadioButton;
+    //private RadioButton mMediumRadioButton;
+    //private RadioButton mLargeRadioButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +54,9 @@ public class OrderActivity extends Activity {
         mViewPager= (ViewPager) findViewById(R.id.pager_view);
         mSpinner= (Spinner) findViewById(R.id.restaurant_chooser);
         mFrame= (RelativeLayout) findViewById(R.id.salad_order);
-        mSmallRadioButton= (RadioButton) findViewById(R.id.radio_small);
-        mMediumRadioButton= (RadioButton) findViewById(R.id.radio_medium);
-        mLargeRadioButton= (RadioButton) findViewById(R.id.radio_large);
+        //mSmallRadioButton= (RadioButton) findViewById(R.id.radio_small);
+        //mMediumRadioButton= (RadioButton) findViewById(R.id.radio_medium);
+        //mLargeRadioButton= (RadioButton) findViewById(R.id.radio_large);
 
         // Retrieve the username from the intent and set the username
         String username= getIntent().getExtras().getString(MainActivity.USERNAME);
