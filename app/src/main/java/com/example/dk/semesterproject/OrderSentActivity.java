@@ -5,21 +5,19 @@ package com.example.dk.semesterproject;
  */
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
+import android.app.AlertDialog;
 import android.widget.SeekBar;
+import android.content.DialogInterface;
+import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import database.DBHelper;
 import database.IngredientDBO;
 import database.RestaurantDBO;
 import models.Ingredient;
@@ -27,14 +25,14 @@ import models.Restaurant;
 
 public class OrderSentActivity extends Activity {
     private SeekBar mSeekBar;
-
+    private TransitionDrawable mTransitionDrawable;
     private Intent i;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_sent_page);
         mSeekBar = (SeekBar) findViewById(R.id.seekBar4);
-        //  access database ingredient time, and restaurant NAME and Address
+
         i = getIntent();
         final String ingredientIds = i.getExtras().getString(OrderActivity.INGREDIENTS);
         IngredientDBO ingredientDBO = new IngredientDBO(OrderSentActivity.this);
@@ -46,12 +44,8 @@ public class OrderSentActivity extends Activity {
             ing.add(ingredientDBO.getIngredientById(Integer.parseInt(ids[i])));
         }
 
-//        List<Ingredient> ing = (ArrayList<Ingredient>) intent.getSerializableExtra("ingredient");
-//        Restaurant rest = (Restaurant) intent.getSerializableExtra("restaurant");
-        //RestaurantDBO rest = new RestaurantDBO();
-        //IngredientDBO ing = new IngredientDBO();
-        //getRestaurantById();
-        //getIngredientById();
+
+
         Restaurant rest = restaurantDBO.getRestaurantById(ing.get(0).getRestaurantId());
 
         ingredientDBO.close();
@@ -62,9 +56,13 @@ public class OrderSentActivity extends Activity {
             time += ing.get(i).getCookTime();
         }
         Log.i("time tag", "" + time);
-//        Random r = new Random();
-//        int i1 = r.nextInt(99);
-//        String s1 = "Order # " + i1 ;
+
+        mTransitionDrawable= (TransitionDrawable) getResources()
+                .getDrawable(R.drawable.group_pic, null);
+        mTransitionDrawable.setCrossFadeEnabled(true);
+        ((ImageView) findViewById(R.id.imageView)).setImageDrawable(mTransitionDrawable);
+        mTransitionDrawable.startTransition(time*1000);
+        mSeekBar.setMax(1000*time);
 
         ArrayList<String> s = new ArrayList<String>();
        // s.add(s1);
@@ -75,36 +73,18 @@ public class OrderSentActivity extends Activity {
                 R.layout.activity_order_sent_listview, s);
         ListView listView = (ListView) findViewById(R.id.sampleListView);
         listView.setAdapter(adapter);
-        //Long t = time*1000l;
         new OrderSentBackground().execute(time*1000);
-        //startSeek(time);
 
-//        Intent i = new Intent(this, OrderPickupActivity.class);
-//        i.putExtra("orderNum", s1);
-//        i.putExtra(DBHelper.COLUMN_RESTAURANT_ADDRESS, rest.getAddress());
-//        i.putExtra(DBHelper.COLUMN_RESTAURANT_NAME, rest.getName());
-//        startActivity(i);
     }
 
-//    private void startSeek(Long t) {
-//        mSeekBar.setMax(t);
-//        mSeekBar.setProgress(0);
-//        timer = new Timer();
-//        timer.schedule(new TimerTask() {
-//            @Override
-//            public void run() {
-//                int p = mSeekBar.getProgress();
-//                p += 1000;
-//                mSeekBar.setProgress(p);
-//            }
-//        }, 1, 1000);
-//    }
 
     private String[] getIds(String ids){
         String[] result = ids.split(",");
 
         return result;
     }
+
+
     private class OrderSentBackground extends AsyncTask<Integer, Integer, Void> {
 
         protected Void doInBackground(Integer... params) {
@@ -133,5 +113,12 @@ public class OrderSentActivity extends Activity {
             i.setClass(OrderSentActivity.this, OrderPickupActivity.class);
             startActivity(i);
         }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, "Please be patient till your order preparation is completed...",
+                Toast.LENGTH_LONG).show();
     }
 }
