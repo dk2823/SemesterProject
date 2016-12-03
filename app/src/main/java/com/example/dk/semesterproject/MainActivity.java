@@ -149,6 +149,7 @@ public class MainActivity extends Activity {
 
         if( !ingredientDBO.isPopulated() ){
             /* restaurant for House */
+
             ingredientDBO.createIngredient(IngredientsAdapter.BANANA_PEPPERS
                     , 50, r1.getRestaurantId(), 1.2, R.drawable.banana_peppers);
 
