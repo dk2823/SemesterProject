@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ public class OrderConfirmActivity extends Activity {
     private ListView mList;
     private Button mOrderBtn;
     private TextView tvRestName;
+    private ImageView ivSalad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,7 @@ public class OrderConfirmActivity extends Activity {
 
         mList = (ListView)findViewById(R.id.sampleListView);
         tvRestName = (TextView) findViewById(R.id.name_of_rest);
+        ivSalad = (ImageView) findViewById(R.id.image);
 
         Intent thisIntent = getIntent();
         double totalPrice = 0;
