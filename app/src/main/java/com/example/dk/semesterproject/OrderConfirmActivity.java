@@ -87,13 +87,6 @@ public class OrderConfirmActivity extends Activity {
         ingredientDBO.close();
         restaurantDBO.close();
 
-//        String[] testStrArr = {"hello", "test", "sick", "nasty"};
-
-//        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_order_confirm_listview, testStrArr);
-
-
-//        mList = (ListView) findViewById(R.id.sampleListView);
-//        mList.setAdapter(adapter);
     }
 
 
@@ -103,54 +96,12 @@ public class OrderConfirmActivity extends Activity {
         return result;
     }
 
-    private void rebuildOrderImage(){
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
         ingredientPlacement.setUp(mFrame);
         for(int i = 0; i < list.size(); i++){
             Ingredient ing = list.get(i);
-
             ingredientPlacement.addIngredient(ing.getName());
-
-/*
-            switch (ing.getName()) {
-                case IngredientsAdapter.BANANA_PEPPERS:
-                    ingredientPlacement.addIngredient(IngredientsAdapter.BANANA_PEPPERS);
-                    break;
-                case IngredientsAdapter.TOMATO:
-                    ingredientPlacement.addIngredient(IngredientsAdapter.TOMATO);
-                    break;
-                case IngredientsAdapter.LETTUCE:
-                    ingredientPlacement.addIngredient(IngredientsAdapter.LETTUCE);
-                    break;
-                case IngredientsAdapter.BLACK_OLIVES:
-                    ingredientPlacement.addIngredient(IngredientsAdapter.BLACK_OLIVES);
-                    break;
-                case IngredientsAdapter.CARROT:
-                    ingredientPlacement.addIngredient(IngredientsAdapter.CARROT);
-                    break;
-                case IngredientsAdapter.CUCUMBERS:
-                    ingredientPlacement.addIngredient(IngredientsAdapter.CUCUMBERS);
-                    break;
-                case IngredientsAdapter.CROUTONS:
-                    ingredientPlacement.addIngredient(IngredientsAdapter.CROUTONS);
-                    break;
-                case IngredientsAdapter.GRAPES:
-                    ingredientPlacement.addIngredient(IngredientsAdapter.GRAPES);
-                    break;
-                case IngredientsAdapter.ONIONS:
-                    ingredientPlacement.addIngredient(IngredientsAdapter.ONIONS);
-                    break;
-                case IngredientsAdapter.STRAWBERRY:
-                    ingredientPlacement.addIngredient(IngredientsAdapter.STRAWBERRY);
-                    break;
-                case IngredientsAdapter.CHEESE:
-                    ingredientPlacement.addIngredient(IngredientsAdapter.CHEESE);
-                    break;
-                default:
-                    ingredientPlacement.addIngredient(IngredientsAdapter.CHICKEN);
-            }
-*/
         }
-
-
     }
 }
