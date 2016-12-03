@@ -649,6 +649,7 @@ public class IngredientPlacement {
                 View v = mFrame.getChildAt(i);
                 if(v.getId() != R.id.ivPlate){
                     mFrame.removeView(v);
+                    i--;
                 }
             }
             plateStack.clear();
