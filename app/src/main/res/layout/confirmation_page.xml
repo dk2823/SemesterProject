@@ -55,7 +55,7 @@
         </ListView>
 
         <RelativeLayout
-            android:id="@+id/image"
+            android:id="@+id/image_confirmation"
             android:paddingTop="10dp"
             android:layout_width="100dp"
             android:layout_height="70dp"
