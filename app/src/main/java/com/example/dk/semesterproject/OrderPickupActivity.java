@@ -18,10 +18,6 @@ public class OrderPickupActivity extends Activity {
 
         Intent thisIntent = getIntent();
 
-        if(!thisIntent.hasExtra(DBHelper.COLUMN_RESTAURANT_ID)){
-            throw new IllegalArgumentException("There's no ingredient");
-        }
-
         String restName = thisIntent.getExtras().getString(DBHelper.COLUMN_RESTAURANT_NAME);
         String restAddress = thisIntent.getExtras().getString(DBHelper.COLUMN_RESTAURANT_ADDRESS);
         String orderNum = thisIntent.getExtras().getString("orderNum");
