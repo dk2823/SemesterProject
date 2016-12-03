@@ -52,24 +52,24 @@
 
         <EditText
             android:paddingTop="20dp"
-            android:id="@+id/username"
+            android:id="@+id/username_payment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Full Name on card"/>
         <EditText
             android:paddingTop="20dp"
-            android:id="@+id/password"
+            android:id="@+id/password_payment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Card Number"
-            android:inputType="textPassword"/>
+            android:inputType="number"/>
         <EditText
             android:paddingTop="20dp"
-            android:id="@+id/confirm_password"
+            android:id="@+id/security_payment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Security Code"
-            android:inputType="textPassword"/>
+            android:inputType="number"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -82,7 +82,7 @@
             android:text="Submit"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:id="@+id/submitButton" />
+            android:id="@+id/submitButton_payment" />
     </LinearLayout>
 
     <LinearLayout
