@@ -18,6 +18,7 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -180,8 +181,14 @@ public class OrderActivity extends Activity {
         mPlaceOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListviewAdapter.packageIntent(intent);
-                startActivity(intent);
+
+                if(mListviewAdapter.getItems().size() > 0){
+                    mListviewAdapter.packageIntent(intent);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(OrderActivity.this, R.string.empty_ing_list,
+                            Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
