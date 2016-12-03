@@ -41,25 +41,32 @@
         <!--android:src="@drawable/salad"-->
 
         <ListView
-        android:id="@+id/sampleListView"
-        android:layout_width="fill_parent"
-        android:layout_height="298dp"
+            android:paddingTop="10dp"
+            android:id="@+id/sampleListView"
+            android:layout_width="fill_parent"
+            android:layout_height="298dp"
             android:background="@android:color/transparent"
-        android:cacheColorHint="@android:color/transparent"
-        android:divider="#CCCCCC"
-        android:dividerHeight="1dp"
-        android:paddingLeft="2dp"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="#CCCCCC"
+            android:dividerHeight="1dp"
+            android:paddingLeft="2dp"
             android:layout_alignParentBottom="true"
             android:layout_below="@+id/image">
         </ListView>
 
-        <ImageView
+        <RelativeLayout
             android:id="@+id/image"
+            android:paddingTop="10dp"
             android:layout_width="100dp"
             android:layout_height="70dp"
-            android:layout_gravity="right"
             android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true" />
+            >
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/plate"
+                 />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/name_of_rest"
@@ -69,7 +76,6 @@
             android:layout_gravity="center"
             android:textColor="#000000"
             android:textSize="30sp"
-            android:text="HERE"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/image" />
 
@@ -92,7 +98,6 @@
             android:layout_gravity="center"
             android:textColor="#000000"
             android:textSize="30sp"
-            android:text="HERE"
             android:layout_above="@+id/sampleListView"
             android:layout_toEndOf="@+id/name_of_rest" />
     </RelativeLayout>
