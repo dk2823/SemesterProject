@@ -41,8 +41,8 @@ public class OrderConfirmActivity extends Activity {
         if(!thisIntent.hasExtra(OrderActivity.INGREDIENTS)){
             throw new IllegalArgumentException("There's no ingredient");
         }
-        String ingredientIds = thisIntent.getExtras().getString(OrderActivity.INGREDIENTS);
-        String[] idArray = getIds(ingredientIds);
+        final String ingredientIds = thisIntent.getExtras().getString(OrderActivity.INGREDIENTS);
+        String[] idArray = getIds(new String(ingredientIds));
 
         IngredientDBO ingredientDBO = new IngredientDBO(OrderConfirmActivity.this);
         RestaurantDBO restaurantDBO = new RestaurantDBO(OrderConfirmActivity.this);
@@ -71,9 +71,8 @@ public class OrderConfirmActivity extends Activity {
         mOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Intent intent= new Intent(OrderConfirmActivity.this, OrderPickupActivity.class);
-                    intent.putExtra(DBHelper.COLUMN_RESTAURANT_ID
-                            , adapter.getItems().get(0).getRestaurantId());
+                    Intent intent= new Intent(OrderConfirmActivity.this, PaymentActivity.class);
+                    intent.putExtra(OrderActivity.INGREDIENTS, ingredientIds);
                     //intent.putExtra(USERNAME, mUsername.getText().toString().trim());
                     startActivity(intent);
 

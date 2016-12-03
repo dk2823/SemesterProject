@@ -18,23 +18,17 @@ public class OrderPickupActivity extends Activity {
 
         Intent thisIntent = getIntent();
 
-        if(!thisIntent.hasExtra(DBHelper.COLUMN_RESTAURANT_ID)){
-            throw new IllegalArgumentException("There's no ingredient");
-        }
-
-        long restId = thisIntent.getExtras().getLong(DBHelper.COLUMN_RESTAURANT_ID);
-
-        RestaurantDBO restaurantDBO = new RestaurantDBO(OrderPickupActivity.this);
-        Restaurant currRest = restaurantDBO.getRestaurantById(restId);
+        String restName = thisIntent.getExtras().getString(DBHelper.COLUMN_RESTAURANT_NAME);
+        String restAddress = thisIntent.getExtras().getString(DBHelper.COLUMN_RESTAURANT_ADDRESS);
+        String orderNum = thisIntent.getExtras().getString("orderNum");
 
         TextView orderNumber = (TextView) findViewById(R.id.tvOrderNumber);
         TextView restaurantName = (TextView) findViewById(R.id.tvRestaurantName);
         TextView address = (TextView) findViewById(R.id.tvAddress);
 
-        orderNumber.setText("Order Number: " + 123456);
-        restaurantName.setText(currRest.getName());
-        address.setText(currRest.getAddress());
+        orderNumber.setText(orderNum);
+        restaurantName.setText(restName);
+        address.setText(restAddress);
 
-        restaurantDBO.close();
     }
 }
