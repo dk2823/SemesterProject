@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
@@ -24,7 +25,9 @@ public class OrderConfirmActivity extends Activity {
     private ListView mList;
     private Button mOrderBtn;
     private TextView tvRestName;
-    private ImageView ivSalad;
+    private RelativeLayout mFrame;
+    private IngredientPlacement ingredientPlacement;
+    ArrayList<Ingredient> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +36,8 @@ public class OrderConfirmActivity extends Activity {
 
         mList = (ListView)findViewById(R.id.sampleListView);
         tvRestName = (TextView) findViewById(R.id.name_of_rest);
-        ivSalad = (ImageView) findViewById(R.id.image);
+        mFrame = (RelativeLayout) findViewById(R.id.image_confirmation);
+        ingredientPlacement= new IngredientPlacement(OrderConfirmActivity.this);
 
         Intent thisIntent = getIntent();
         double totalPrice = 0;
@@ -46,7 +50,7 @@ public class OrderConfirmActivity extends Activity {
 
         IngredientDBO ingredientDBO = new IngredientDBO(OrderConfirmActivity.this);
         RestaurantDBO restaurantDBO = new RestaurantDBO(OrderConfirmActivity.this);
-        ArrayList<Ingredient> list = new ArrayList<Ingredient>();
+        list = new ArrayList<Ingredient>();
 
         for(int i = 0; i < idArray.length; i++){
             list.add(ingredientDBO.getIngredientById(Integer.parseInt(idArray[i])));
@@ -97,5 +101,56 @@ public class OrderConfirmActivity extends Activity {
         String[] result = ids.split(",");
 
         return result;
+    }
+
+    private void rebuildOrderImage(){
+        ingredientPlacement.setUp(mFrame);
+        for(int i = 0; i < list.size(); i++){
+            Ingredient ing = list.get(i);
+
+            ingredientPlacement.addIngredient(ing.getName());
+
+/*
+            switch (ing.getName()) {
+                case IngredientsAdapter.BANANA_PEPPERS:
+                    ingredientPlacement.addIngredient(IngredientsAdapter.BANANA_PEPPERS);
+                    break;
+                case IngredientsAdapter.TOMATO:
+                    ingredientPlacement.addIngredient(IngredientsAdapter.TOMATO);
+                    break;
+                case IngredientsAdapter.LETTUCE:
+                    ingredientPlacement.addIngredient(IngredientsAdapter.LETTUCE);
+                    break;
+                case IngredientsAdapter.BLACK_OLIVES:
+                    ingredientPlacement.addIngredient(IngredientsAdapter.BLACK_OLIVES);
+                    break;
+                case IngredientsAdapter.CARROT:
+                    ingredientPlacement.addIngredient(IngredientsAdapter.CARROT);
+                    break;
+                case IngredientsAdapter.CUCUMBERS:
+                    ingredientPlacement.addIngredient(IngredientsAdapter.CUCUMBERS);
+                    break;
+                case IngredientsAdapter.CROUTONS:
+                    ingredientPlacement.addIngredient(IngredientsAdapter.CROUTONS);
+                    break;
+                case IngredientsAdapter.GRAPES:
+                    ingredientPlacement.addIngredient(IngredientsAdapter.GRAPES);
+                    break;
+                case IngredientsAdapter.ONIONS:
+                    ingredientPlacement.addIngredient(IngredientsAdapter.ONIONS);
+                    break;
+                case IngredientsAdapter.STRAWBERRY:
+                    ingredientPlacement.addIngredient(IngredientsAdapter.STRAWBERRY);
+                    break;
+                case IngredientsAdapter.CHEESE:
+                    ingredientPlacement.addIngredient(IngredientsAdapter.CHEESE);
+                    break;
+                default:
+                    ingredientPlacement.addIngredient(IngredientsAdapter.CHICKEN);
+            }
+*/
+        }
+
+
     }
 }

@@ -44,6 +44,11 @@
             android:name=".PaymentActivity"
             android:screenOrientation="portrait"
             android:label="Payment"/>
+        <activity
+            android:name=".OrderSentActivity"
+            android:screenOrientation="portrait"
+            android:label="OrderSent"/>
+
 
     </application>
 

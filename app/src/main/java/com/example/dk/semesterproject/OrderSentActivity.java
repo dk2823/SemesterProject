@@ -5,7 +5,9 @@ package com.example.dk.semesterproject;
  */
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -57,6 +59,7 @@ public class OrderSentActivity extends Activity {
         for (int i = 0; i < ing.size(); i++) {
             time += ing.get(i).getCookTime();
         }
+        Log.i("time tag", "" + time);
         Random r = new Random();
         int i1 = r.nextInt(99);
         String s1 = "Order # " + i1 ;
@@ -80,7 +83,7 @@ public class OrderSentActivity extends Activity {
     }
 
     private void startSeek(int t) {
-        mSeekBar.setMax(t*1000);
+        mSeekBar.setMax(t);
         mSeekBar.setProgress(0);
         timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -98,4 +101,8 @@ public class OrderSentActivity extends Activity {
 
         return result;
     }
+//    private class OrderSentBackground extends AsyncTask<Long, Long, Void> {
+//
+//
+//    }
 }

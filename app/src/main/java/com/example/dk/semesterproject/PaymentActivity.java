@@ -28,12 +28,14 @@ public class PaymentActivity extends Activity {
         cardNumber= (EditText) findViewById(R.id.password_payment);
         securityCode= (EditText) findViewById(R.id.security_payment);
         mSubmit= (Button) findViewById(R.id.submitButton_payment);
-        mIntent= getIntent();
 
-        if(!mIntent.hasExtra(OrderActivity.INGREDIENTS)){
+        Intent prevIntent= getIntent();
+
+
+        if(!prevIntent.hasExtra(OrderActivity.INGREDIENTS)){
             throw new IllegalArgumentException("There's no ingredient");
         }
-        final String ingredientIds = mIntent.getExtras().getString(OrderActivity.INGREDIENTS);
+        final String ingredientIds = prevIntent.getExtras().getString(OrderActivity.INGREDIENTS);
 
         mSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,7 +43,8 @@ public class PaymentActivity extends Activity {
                 if (!fullName.getText().toString().trim().equals("") &&
                         !cardNumber.getText().toString().trim().equals("") &&
                         !securityCode.getText().toString().trim().equals("")) {
-                    mIntent.setClass(PaymentActivity.this, OrderSentActivity.class);
+
+                    mIntent= new Intent(PaymentActivity.this, OrderSentActivity.class);
                     mIntent.putExtra(OrderActivity.INGREDIENTS, ingredientIds);
                     startActivity(mIntent);
                 } else {
