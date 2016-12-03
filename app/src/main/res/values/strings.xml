@@ -40,4 +40,5 @@
         <item>Panera Bread</item>
         <item>Chart House</item>
     </string-array>
+    <string name="empty_ing_list">Please grab some ingredients</string>
 </resources>
