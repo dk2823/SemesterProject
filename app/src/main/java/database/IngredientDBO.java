@@ -47,7 +47,7 @@ public class IngredientDBO {
         mDatabase.close();
     }
 
-    public Ingredient createIngredient(String name, int cookTime, long restaurantId, int price, int imageId){
+    public Ingredient createIngredient(String name, int cookTime, long restaurantId, double price, int imageId){
         ContentValues values = new ContentValues();
         values.put(DBHelper.COLUMN_INGREDIENT_NAME, name);
         values.put(DBHelper.COLUMN_INGREDIENT_COOKTIME, cookTime);
@@ -112,9 +112,22 @@ public class IngredientDBO {
         newOne.setName(cursor.getString(1));
         newOne.setCookTime(cursor.getInt(2));
         newOne.setRestaurantId(cursor.getLong(3));
-        newOne.setPrice(cursor.getInt(4));
+        newOne.setPrice(cursor.getDouble(4));
         newOne.setImageId(cursor.getInt(5));
 
         return newOne;
+    }
+
+    public boolean isPopulated(){
+        Cursor c = mDatabase.rawQuery("SELECT * FROM " + DBHelper.TABLE_INGREDIENTS, null);
+        boolean result = false;
+        if( c.getCount() > 0 ){
+            result = true;
+        }else{
+            result = false;
+        }
+        c.close();
+
+        return result;
     }
 }

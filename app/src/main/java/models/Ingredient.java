@@ -8,8 +8,9 @@ public class Ingredient {
     private String name;
     private int cookTime;
     private long restaurantId;
-    private int price;
+    private double price;
     private int imageId;
+    private String quantity;
 
 
     public Ingredient(){
@@ -17,7 +18,7 @@ public class Ingredient {
     }
 
     public Ingredient(long ingredientId, String name, int cookTime, long restaurantId,
-                      int price, int imageId) {
+                      double price, int imageId) {
         this.ingredientId = ingredientId;
         this.name = name;
         this.cookTime = cookTime;
@@ -66,11 +67,19 @@ public class Ingredient {
         this.imageId = imageId;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
     }
 }

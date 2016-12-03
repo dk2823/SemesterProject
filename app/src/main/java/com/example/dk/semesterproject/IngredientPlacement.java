@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -613,6 +614,19 @@ public class IngredientPlacement {
         items.put(IngredientsAdapter.STRAWBERRY, 1);
         items.put(IngredientsAdapter.TOMATO, 2);
         items.put(IngredientsAdapter.ONIONS, 1);
+    }
+
+    public void resetIngredientPlacement() {
+        if(mFrame != null && plateStack != null){
+
+            for (int i = 0; i < mFrame.getChildCount(); i++) {
+                View v = mFrame.getChildAt(i);
+                if(v.getId() != R.id.ivPlate){
+                    mFrame.removeView(v);
+                }
+            }
+            plateStack.clear();
+        }
     }
 
 }

@@ -19,6 +19,13 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
+import database.IngredientDBO;
+import database.RestaurantDBO;
+import models.Ingredient;
+import models.Restaurant;
+
 /**
  * Created by Eck on 11/20/16.
  */
@@ -37,12 +44,17 @@ public class OrderActivity extends Activity {
     private ListView mListView;
     private Spinner mSpinner;
     private RelativeLayout mFrame;
-    private ArrayAdapter<CharSequence> mSpinnerAdapter;
+    private ArrayAdapter<String> mSpinnerAdapter;
     private AlertDialog mAlertDialog;
     private Button mPlaceOrderBtn;
     //private RadioButton mSmallRadioButton;
     //private RadioButton mMediumRadioButton;
     //private RadioButton mLargeRadioButton;
+
+    /* List of Restaurant Objects */
+    private RestaurantDBO restaurantDBO;
+    private IngredientDBO ingredientDBO;
+    private ArrayList<Ingredient> ingredientsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +70,18 @@ public class OrderActivity extends Activity {
         //mMediumRadioButton= (RadioButton) findViewById(R.id.radio_medium);
         //mLargeRadioButton= (RadioButton) findViewById(R.id.radio_large);
 
+        /* Get the Restaurants Objects List from Database */
+        restaurantDBO = new RestaurantDBO(OrderActivity.this);
+        ingredientDBO = new IngredientDBO(OrderActivity.this);
+        final ArrayList<Restaurant> restList = restaurantDBO.getAllRestaurants();
+        // The spinner should display restList.get(0).getName() by default,
+        // so assign ingredientsList with restList.get(0) ingredients
+        ingredientsList =
+                ingredientDBO.getIngredientsListByRestaurant(restList.get(0).getRestaurantId());
+
+        // Get the names of restaurants
+        String[] nameList = getRestNames(restList);
+
         // Retrieve the username from the intent and set the username
         String username= getIntent().getExtras().getString(MainActivity.USERNAME);
         mUsername.setText(username);
@@ -66,14 +90,39 @@ public class OrderActivity extends Activity {
         intent.putExtra(USERNAME, username);
 
         mListviewAdapter= new ListviewAdapter(getApplicationContext());
-        mSpinnerAdapter= ArrayAdapter.createFromResource(getApplicationContext(),
-                R.array.restaurants, R.layout.spinner_item);
+//        mSpinnerAdapter= ArrayAdapter.createFromResource(getApplicationContext(),
+//                R.array.restaurants, R.layout.spinner_item);
+        mSpinnerAdapter =
+                new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, nameList);
         mSpinnerAdapter.setDropDownViewResource(R.layout.spinner_item);
+
+        mSpinner.setAdapter(mSpinnerAdapter);
+        mListView.setAdapter(mListviewAdapter);
+        mIngredientsAdapter= new IngredientsAdapter(this, mListviewAdapter, mFrame, ingredientsList);
+        mViewPager.setAdapter(mIngredientsAdapter);
 
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                intent.putExtra(RESTAURANT, mSpinnerAdapter.getItem(position));
+
+                IngredientDBO ingredientDBOtemp =
+                        new IngredientDBO(OrderActivity.this.getApplicationContext());
+
+                ArrayList<Ingredient> changedList =
+                        ingredientDBOtemp.getIngredientsListByRestaurant
+                                (restList.get(position).getRestaurantId());
+
+                mIngredientsAdapter.setItems(changedList);
+                mIngredientsAdapter.getIngredientPlacement().resetIngredientPlacement();
+                mIngredientsAdapter.notifyDataSetChanged();
+
+                mListviewAdapter.resetItem();
+                mListviewAdapter.notifyDataSetChanged();
+
+
+
+                ingredientDBOtemp.close();
+
             }
 
             @Override
@@ -81,11 +130,6 @@ public class OrderActivity extends Activity {
                 // Nothing
             }
         });
-
-        mSpinner.setAdapter(mSpinnerAdapter);
-        mListView.setAdapter(mListviewAdapter);
-        mIngredientsAdapter= new IngredientsAdapter(this, mListviewAdapter, mFrame);
-        mViewPager.setAdapter(mIngredientsAdapter);
 
         // Show the user how to use the app via an AlertDialog
         AlertDialog.Builder builder= new AlertDialog.Builder(this);
@@ -113,7 +157,8 @@ public class OrderActivity extends Activity {
                         .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                String ingredient= (String) mListviewAdapter.getItem(position);
+                                Ingredient ingredient=
+                                        (Ingredient) mListviewAdapter.getItem(position);
                                 mIngredientsAdapter.remove(ingredient);
                                 dialog.cancel();
                             }
@@ -145,6 +190,14 @@ public class OrderActivity extends Activity {
     protected void onResume() {
         super.onResume();
         mAlertDialog.show();
+        restaurantDBO = new RestaurantDBO(OrderActivity.this);
+        ingredientDBO = new IngredientDBO(OrderActivity.this);
+    }
+
+    protected void onPause() {
+        super.onPause();
+        restaurantDBO.close();
+        ingredientDBO.close();
     }
 
     @Override
@@ -156,6 +209,15 @@ public class OrderActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
+    }
+
+    private String[] getRestNames(ArrayList<Restaurant> list){
+        String[] nameList = new String[list.size()];
+        for(int i = 0; i < nameList.length; i++){
+            nameList[i] = list.get(i).getName();
+        }
+
+        return nameList;
     }
 
 }

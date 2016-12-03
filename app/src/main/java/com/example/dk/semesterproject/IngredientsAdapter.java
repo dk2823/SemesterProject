@@ -1,7 +1,10 @@
 package com.example.dk.semesterproject;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,13 +16,16 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import models.Ingredient;
+
 /**
  * Created by Eck on 11/20/16.
  */
 
 public class IngredientsAdapter extends PagerAdapter {
     private Context mContext;
-    private ArrayList<Item> items;
+//    private ArrayList<Item> items;
+    private ArrayList<Ingredient> items;
     private RelativeLayout mFrame;
     private IngredientPlacement ingredientPlacement;
     private ListviewAdapter mListviewAdapter;
@@ -38,87 +44,97 @@ public class IngredientsAdapter extends PagerAdapter {
     public static final String CHICKEN= "Chicken";
     public static final String TAG= "IngredientsAdapter";
 
-    public IngredientsAdapter(Context context, ListviewAdapter adapter, RelativeLayout frame) {
+    public IngredientsAdapter(Context context, ListviewAdapter adapter,
+                              RelativeLayout frame, ArrayList<Ingredient> list) {
         mContext= context;
-        items= new ArrayList<>();
-        init(items);
+        items = list;
+//        items= new ArrayList<>();
+//        init(items);
         ingredientPlacement= new IngredientPlacement(context);
         mListviewAdapter= adapter;
         mFrame= frame;
     }
 
-    public void remove(String ingredient) {
-        ingredientPlacement.remove(ingredient);
+    public void remove(Ingredient ingredient) {
+        ingredientPlacement.remove(ingredient.getName());
         mListviewAdapter.remove(ingredient);
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
+
         // Get the layout for a specific item
         LinearLayout linearLayout= (LinearLayout) LayoutInflater.from(mContext)
                 .inflate(R.layout.view_pager_item, null);
 
+
         // Retrieve the ImageView and the textView and add the layout to the container
         ImageView itemImage= (ImageView) linearLayout.findViewById(R.id.item);
         TextView itemName= (TextView) linearLayout.findViewById(R.id.item_name);
-        final Item it= items.get(position);
+        final Ingredient it= items.get(position);
 
-        itemImage.setImageResource(it.id);
-        itemName.setText(it.name);
+        /*
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 8;
+        Bitmap img = BitmapFactory.decodeResource(mContext.getResources(), it.getImageId(), options);
+        itemImage.setImageBitmap(img);
+        */
+        itemImage.setImageResource(it.getImageId());
+        itemName.setText(it.getName());
 
         // Attach a listener to the image view
         itemImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ingredientPlacement.setUp(mFrame);
-                switch (it.name) {
+                switch (it.getName()) {
                     case BANANA_PEPPERS:
                         if (ingredientPlacement.addIngredient(BANANA_PEPPERS))
-                            mListviewAdapter.add(BANANA_PEPPERS);
+                            mListviewAdapter.add(it);
                         break;
                     case TOMATO:
                         if (ingredientPlacement.addIngredient(TOMATO))
-                            mListviewAdapter.add(TOMATO);
+                            mListviewAdapter.add(it);
                         break;
                     case LETTUCE:
                         if (ingredientPlacement.addIngredient(LETTUCE))
-                            mListviewAdapter.add(LETTUCE);
+                            mListviewAdapter.add(it);
                         break;
                     case BLACK_OLIVES:
                         if (ingredientPlacement.addIngredient(BLACK_OLIVES))
-                            mListviewAdapter.add(BLACK_OLIVES);
+                            mListviewAdapter.add(it);
                         break;
                     case CARROT:
                         if (ingredientPlacement.addIngredient(CARROT))
-                            mListviewAdapter.add(CARROT);
+                            mListviewAdapter.add(it);
                         break;
                     case CUCUMBERS:
                         if (ingredientPlacement.addIngredient(CUCUMBERS))
-                            mListviewAdapter.add(CUCUMBERS);
+                            mListviewAdapter.add(it);
                         break;
                     case CROUTONS:
                         if (ingredientPlacement.addIngredient(CROUTONS))
-                            mListviewAdapter.add(CROUTONS);
+                            mListviewAdapter.add(it);
                         break;
                     case GRAPES:
                         if (ingredientPlacement.addIngredient(GRAPES))
-                            mListviewAdapter.add(GRAPES);
+                            mListviewAdapter.add(it);
                         break;
                     case ONIONS:
                         if (ingredientPlacement.addIngredient(ONIONS))
-                            mListviewAdapter.add(ONIONS);
+                            mListviewAdapter.add(it);
                         break;
                     case STRAWBERRY:
                         if (ingredientPlacement.addIngredient(STRAWBERRY))
-                            mListviewAdapter.add(STRAWBERRY);
+                            mListviewAdapter.add(it);
                         break;
                     case CHEESE:
                         if (ingredientPlacement.addIngredient(CHEESE))
-                            mListviewAdapter.add(CHEESE);
+                            mListviewAdapter.add(it);
                         break;
                     default:
                         if (ingredientPlacement.addIngredient(CHICKEN))
-                            mListviewAdapter.add(CHICKEN);
+                            mListviewAdapter.add(it);
                 }
             }
         });
@@ -138,9 +154,29 @@ public class IngredientsAdapter extends PagerAdapter {
         return view==object;
     }
 
+    public void setItems(ArrayList<Ingredient> list){
+        this.items = list;
+    }
+
+    @Override
+    public void destroyItem(View container, int position, Object object) {
+        ((ViewPager) container).removeView((View) object);
+    }
+
+    public IngredientPlacement getIngredientPlacement(){
+        return this.ingredientPlacement;
+    }
+
+
+    @Override
+    public int getItemPosition(Object object){
+        return PagerAdapter.POSITION_NONE;
+    }
+
     /**
      * Initializes the arraylist of ingredients pictures with their names
      */
+    /*
     private void init(ArrayList<Item> items) {
         items.add(new Item(R.drawable.banana_peppers, BANANA_PEPPERS));
         items.add(new Item(R.drawable.black_olives, BLACK_OLIVES));
@@ -154,6 +190,8 @@ public class IngredientsAdapter extends PagerAdapter {
         items.add(new Item(R.drawable.strawberry, STRAWBERRY));
         items.add(new Item(R.drawable.tomatoes, TOMATO));
         items.add(new Item(R.drawable.chicken, CHICKEN));
+
+        test(R.drawable.chicken);
     }
 
     @Override
@@ -171,4 +209,5 @@ public class IngredientsAdapter extends PagerAdapter {
         }
     }
 
+    */
 }

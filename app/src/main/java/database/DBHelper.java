@@ -15,7 +15,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     // define database name and version
     private static final String DB_NAME = "saladBarDB.db";
-    private static final int DB_VERSION = 28;
+    private static final int DB_VERSION = 31;
 
     // define table name and columns
 
@@ -65,7 +65,7 @@ public class DBHelper extends SQLiteOpenHelper {
             + COLUMN_INGREDIENT_NAME + " TEXT NOT NULL, "
             + COLUMN_INGREDIENT_COOKTIME + " INTEGER NOT NULL, "
             + COLUMN_INGREDIENT_RESTAURANT_ID + " INTEGER NOT NULL, "
-            + COLUMN_INGREDIENT_PRICE + " INTEGER NOT NULL, "
+            + COLUMN_INGREDIENT_PRICE + " REAL NOT NULL, "
             + COLUMN_INGREDIENT_IMAGE_ID + " INTEGER NOT NULL);";
 
     private static final String SQL_CREATE_TABLE_PREFERENCES = "CREATE TABLE " +

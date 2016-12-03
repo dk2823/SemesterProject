@@ -117,4 +117,17 @@ public class RestaurantDBO {
 
         return newOne;
     }
+
+    public boolean isPopulated(){
+        Cursor c = mDatabase.rawQuery("SELECT * FROM " + DBHelper.TABLE_RESTAURANTS, null);
+        boolean result = false;
+        if( c.getCount() > 0 ){
+            result = true;
+        }else{
+            result = false;
+        }
+        c.close();
+
+        return result;
+    }
 }

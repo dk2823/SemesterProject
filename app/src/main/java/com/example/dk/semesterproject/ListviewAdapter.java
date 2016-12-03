@@ -10,29 +10,31 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import models.Ingredient;
+
 /**
  * Created by Eck on 12/2/16.
  */
 
 public class ListviewAdapter extends BaseAdapter {
     private Context mContext;
-    private ArrayList<String> ingredientsList;
+    private ArrayList<Ingredient> ingredientsList;
 
     public ListviewAdapter(Context context) {
         mContext= context;
-        ingredientsList= new ArrayList<>();
+        ingredientsList= new ArrayList<Ingredient>();
     }
 
-    public void add(String ingredient) {
+    public void add(Ingredient ingredient) {
         ingredientsList.add(ingredient);
         notifyDataSetChanged();
     }
 
     public void packageIntent(Intent intent) {
-        intent.putExtra(OrderActivity.INGREDIENTS, new ArrayList<String>(ingredientsList));
+        intent.putExtra(OrderActivity.INGREDIENTS, getIngredientIds(this.ingredientsList));
     }
 
-    public void remove(String ingredient) {
+    public void remove(Ingredient ingredient) {
         ingredientsList.remove(ingredient);
         notifyDataSetChanged();
     }
@@ -46,7 +48,7 @@ public class ListviewAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View newView=convertView;
         ViewHolder viewHolder;
-        String ingredient= ingredientsList.get(position);
+        Ingredient ingredient= ingredientsList.get(position);
 
         if (convertView==null) {
             viewHolder= new ViewHolder();
@@ -58,7 +60,7 @@ public class ListviewAdapter extends BaseAdapter {
             viewHolder= (ViewHolder) newView.getTag();
         }
 
-        viewHolder.textView.setText(ingredient);
+        viewHolder.textView.setText(ingredient.getName());
 
         return newView;
     }
@@ -73,7 +75,26 @@ public class ListviewAdapter extends BaseAdapter {
         return ingredientsList.get(position);
     }
 
+    public void resetItem(){
+        this.ingredientsList = new ArrayList<Ingredient>();
+    }
+
     private static class ViewHolder {
         private TextView textView;
+    }
+
+    private String getIngredientIds(ArrayList<Ingredient> list){
+        int length = list.size();
+        int lastIndex = length - 1;
+        String result = "";
+
+        for(int i = 0; i < length; i++){
+            result += list.get(i).getIngredientId();
+            if(i != lastIndex){
+                result += ",";
+            }
+        }
+
+        return result;
     }
 }

@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SemesterProject-Saladbar.iml" filepath="$PROJECT_DIR$/SemesterProject-Saladbar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SaladBarAppasdf.iml" filepath="$PROJECT_DIR$/SaladBarAppasdf.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sp.iml" filepath="$PROJECT_DIR$/sp.iml" />
     </modules>
   </component>
 </project>
