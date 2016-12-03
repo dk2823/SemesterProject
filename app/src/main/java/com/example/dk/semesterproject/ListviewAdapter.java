@@ -97,4 +97,8 @@ public class ListviewAdapter extends BaseAdapter {
 
         return result;
     }
+
+    public ArrayList<Ingredient> getItems(){
+        return this.ingredientsList;
+    }
 }
