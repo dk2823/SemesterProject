@@ -108,7 +108,7 @@
                 android:paddingLeft="4dp"
                 android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold|italic"/>
-
+<!--
             <RadioGroup
                 android:id="@+id/radio_buttons"
                 android:layout_width="wrap_content"
@@ -140,12 +140,11 @@
                     android:textIsSelectable="true"/>
 
             </RadioGroup>
-
+-->
             <LinearLayout
                 android:layout_width="140dp"
                 android:layout_height="140dp"
                 android:paddingTop="5dp"
-                android:layout_below="@id/radio_buttons"
                 android:layout_centerInParent="true"
                 android:orientation="vertical">
 
@@ -158,16 +157,6 @@
             </LinearLayout>
 
         </RelativeLayout>
-
-        <Button
-            android:id="@+id/button_order"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Place Order"
-            android:layout_below="@id/ingredients_layout"
-            android:textSize="20sp"
-            android:textColor="@color/features"
-            android:layout_centerHorizontal="true"/>
 
         <LinearLayout
             android:layout_alignParentBottom="true"
@@ -184,6 +173,17 @@
                 android:text="@string/footer"/>
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/button_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Place Order"
+            android:textSize="20sp"
+            android:textColor="@color/features"
+            android:layout_below="@+id/ingredients_layout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="26dp" />
 
     </RelativeLayout>
 

@@ -101,11 +101,6 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp">
 
-        <Button
-            android:text="Main Page"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/backButton" />
     </LinearLayout>
 
     <LinearLayout
