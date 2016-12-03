@@ -23,23 +23,27 @@
         <activity
             android:name=".RegisterActivity"
             android:label="Register"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".OrderActivity"
             android:label="Order"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".PasswordRecoveryActivity"
             android:label="Password Recovery"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".OrderPickupActivity"
             android:screenOrientation="portrait"
-            android:label="Working On Order"></activity>
+            android:label="Working On Order"/>
         <activity
             android:name=".OrderConfirmActivity"
             android:label="Confirm page"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".PaymentActivity"
+            android:screenOrientation="portrait"
+            android:label="Payment"/>
 
     </application>
 
