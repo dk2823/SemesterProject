@@ -30,6 +30,11 @@ public class PaymentActivity extends Activity {
         mSubmit= (Button) findViewById(R.id.submitButton_payment);
         mIntent= getIntent();
 
+        if(!mIntent.hasExtra(OrderActivity.INGREDIENTS)){
+            throw new IllegalArgumentException("There's no ingredient");
+        }
+        final String ingredientIds = mIntent.getExtras().getString(OrderActivity.INGREDIENTS);
+
         mSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,6 +42,7 @@ public class PaymentActivity extends Activity {
                         !cardNumber.getText().toString().trim().equals("") &&
                         !securityCode.getText().toString().trim().equals("")) {
                     mIntent.setClass(PaymentActivity.this, OrderSentActivity.class);
+                    mIntent.putExtra(OrderActivity.INGREDIENTS, ingredientIds);
                     startActivity(mIntent);
                 } else {
                     Toast.makeText(PaymentActivity.this, R.string.entry_missing,

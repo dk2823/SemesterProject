@@ -17,6 +17,9 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import database.DBHelper;
+import database.IngredientDBO;
+import database.RestaurantDBO;
 import models.Ingredient;
 import models.Restaurant;
 
@@ -27,14 +30,29 @@ public class OrderSentActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_sent_page);
         mSeekBar = (SeekBar) findViewById(R.id.seekBar4);
-        //TODO  access database ingredient time, and restaurant NAME and Address
+        //  access database ingredient time, and restaurant NAME and Address
         Intent intent = getIntent();
-        List<Ingredient> ing = (ArrayList<Ingredient>) intent.getSerializableExtra("ingredient");
-        Restaurant rest = (Restaurant) intent.getSerializableExtra("restaurant");
+        final String ingredientIds = intent.getExtras().getString(OrderActivity.INGREDIENTS);
+        IngredientDBO ingredientDBO = new IngredientDBO(OrderSentActivity.this);
+        RestaurantDBO restaurantDBO = new RestaurantDBO(OrderSentActivity.this);
+        String[] ids = getIds(new String(ingredientIds));
+        ArrayList<Ingredient> ing = new ArrayList<Ingredient>();
+
+        for(int i = 0; i < ids.length; i++){
+            ing.add(ingredientDBO.getIngredientById(Integer.parseInt(ids[i])));
+        }
+
+//        List<Ingredient> ing = (ArrayList<Ingredient>) intent.getSerializableExtra("ingredient");
+//        Restaurant rest = (Restaurant) intent.getSerializableExtra("restaurant");
         //RestaurantDBO rest = new RestaurantDBO();
         //IngredientDBO ing = new IngredientDBO();
         //getRestaurantById();
         //getIngredientById();
+        Restaurant rest = restaurantDBO.getRestaurantById(ing.get(0).getRestaurantId());
+
+        ingredientDBO.close();
+        restaurantDBO.close();
+
         int time = 0;
         for (int i = 0; i < ing.size(); i++) {
             time += ing.get(i).getCookTime();
@@ -56,8 +74,8 @@ public class OrderSentActivity extends Activity {
 
         Intent i = new Intent(this, OrderPickupActivity.class);
         i.putExtra("orderNum", s1);
-        i.putExtra("address", rest.getAddress());
-        i.putExtra("name", rest.getName());
+        i.putExtra(DBHelper.COLUMN_RESTAURANT_ADDRESS, rest.getAddress());
+        i.putExtra(DBHelper.COLUMN_RESTAURANT_NAME, rest.getName());
         startActivity(i);
     }
 
@@ -73,5 +91,11 @@ public class OrderSentActivity extends Activity {
                 mSeekBar.setProgress(p);
             }
         }, 1, 1000);
+    }
+
+    private String[] getIds(String ids){
+        String[] result = ids.split(",");
+
+        return result;
     }
 }
