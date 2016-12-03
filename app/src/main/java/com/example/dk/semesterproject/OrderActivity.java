@@ -212,7 +212,7 @@ public class OrderActivity extends Activity {
             case R.id.logout:
                 AlertDialog.Builder ab= new AlertDialog.Builder(this);
                 ab.setCancelable(false)
-                        .setMessage("Do you want to logout")
+                        .setMessage("Do you want to logout?")
                         .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -234,6 +234,29 @@ public class OrderActivity extends Activity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder ab= new AlertDialog.Builder(this);
+        ab.setCancelable(false)
+                .setMessage("Do you want to logout?")
+                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        OrderActivity.this.finish();
+                    }
+                })
+                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog a= ab.create();
+        a.setTitle("Logout?");
+        a.show();
     }
 
     private String[] getRestNames(ArrayList<Restaurant> list){
