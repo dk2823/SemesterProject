@@ -157,114 +157,114 @@ public class MainActivity extends Activity {
             /* restaurant for House */
 
             ingredientDBO.createIngredient(IngredientsAdapter.BANANA_PEPPERS
-                    , 50, r1.getRestaurantId(), 1.2, R.drawable.banana_peppers);
+                    , 5, r1.getRestaurantId(), 1.2, R.drawable.banana_peppers);
 
             ingredientDBO.createIngredient(IngredientsAdapter.BLACK_OLIVES
-                    , 30, r1.getRestaurantId(), 1.4, R.drawable.black_olives);
+                    , 3, r1.getRestaurantId(), 1.4, R.drawable.black_olives);
 
             ingredientDBO.createIngredient(IngredientsAdapter.CARROT
-                    , 20, r1.getRestaurantId(), 1.5, R.drawable.carrot);
+                    , 2, r1.getRestaurantId(), 1.5, R.drawable.carrot);
 
             ingredientDBO.createIngredient(IngredientsAdapter.CUCUMBERS
-                    , 10, r1.getRestaurantId(), 0.5, R.drawable.cucumbers);
+                    , 1, r1.getRestaurantId(), 0.5, R.drawable.cucumbers);
 
             ingredientDBO.createIngredient(IngredientsAdapter.CROUTONS
-                    , 60, r1.getRestaurantId(), 1.7, R.drawable.garlic_croutons);
+                    , 6, r1.getRestaurantId(), 1.7, R.drawable.garlic_croutons);
 
             ingredientDBO.createIngredient(IngredientsAdapter.GRAPES
-                    , 10, r1.getRestaurantId(), 1.4, R.drawable.grape);
+                    , 1, r1.getRestaurantId(), 1.4, R.drawable.grape);
 
             ingredientDBO.createIngredient(IngredientsAdapter.ONIONS
-                    , 20, r1.getRestaurantId(), 0.7, R.drawable.onions);
+                    , 2, r1.getRestaurantId(), 0.7, R.drawable.onions);
 
             ingredientDBO.createIngredient(IngredientsAdapter.LETTUCE
                     , 5, r1.getRestaurantId(), 0.5, R.drawable.romaine_lettuce);
 
             ingredientDBO.createIngredient(IngredientsAdapter.CHEESE
-                    , 20, r1.getRestaurantId(), 1.3, R.drawable.shredded_cheese);
+                    , 2, r1.getRestaurantId(), 1.3, R.drawable.shredded_cheese);
 
             ingredientDBO.createIngredient(IngredientsAdapter.STRAWBERRY
-                    , 30, r1.getRestaurantId(), 1.1, R.drawable.strawberry);
+                    , 3, r1.getRestaurantId(), 1.1, R.drawable.strawberry);
 
             ingredientDBO.createIngredient(IngredientsAdapter.TOMATO
-                    , 10, r1.getRestaurantId(), 0.3, R.drawable.tomatoes);
+                    , 1, r1.getRestaurantId(), 0.3, R.drawable.tomatoes);
 
             ingredientDBO.createIngredient(IngredientsAdapter.CHICKEN
-                    , 80, r1.getRestaurantId(), 2.1, R.drawable.chicken);
+                    , 8, r1.getRestaurantId(), 2.1, R.drawable.chicken);
 
             /* restaurant for Panera Bread */
             ingredientDBO.createIngredient(IngredientsAdapter.CUCUMBERS
-                    , 30, r2.getRestaurantId(), 0.8, R.drawable.cucumbers);
+                    , 3, r2.getRestaurantId(), 0.8, R.drawable.cucumbers);
 
             ingredientDBO.createIngredient(IngredientsAdapter.CHEESE
-                    , 50, r2.getRestaurantId(), 1.8, R.drawable.shredded_cheese);
+                    , 5, r2.getRestaurantId(), 1.8, R.drawable.shredded_cheese);
 
             ingredientDBO.createIngredient(IngredientsAdapter.STRAWBERRY
-                    , 20, r2.getRestaurantId(), 1.3, R.drawable.strawberry);
+                    , 2, r2.getRestaurantId(), 1.3, R.drawable.strawberry);
 
             ingredientDBO.createIngredient(IngredientsAdapter.TOMATO
-                    , 50, r2.getRestaurantId(), 0.4, R.drawable.tomatoes);
+                    , 5, r2.getRestaurantId(), 0.4, R.drawable.tomatoes);
 
             ingredientDBO.createIngredient(IngredientsAdapter.CROUTONS
-                    , 20, r2.getRestaurantId(), 1.4, R.drawable.garlic_croutons);
+                    , 2, r2.getRestaurantId(), 1.4, R.drawable.garlic_croutons);
 
             ingredientDBO.createIngredient(IngredientsAdapter.GRAPES
-                    , 60, r2.getRestaurantId(), 1.9, R.drawable.grape);
+                    , 6, r2.getRestaurantId(), 1.9, R.drawable.grape);
 
             ingredientDBO.createIngredient(IngredientsAdapter.ONIONS
-                    , 40, r2.getRestaurantId(), 0.5, R.drawable.onions);
+                    , 4, r2.getRestaurantId(), 0.5, R.drawable.onions);
 
             ingredientDBO.createIngredient(IngredientsAdapter.LETTUCE
-                    , 50, r2.getRestaurantId(), 0.7, R.drawable.romaine_lettuce);
+                    , 5, r2.getRestaurantId(), 0.7, R.drawable.romaine_lettuce);
 
             ingredientDBO.createIngredient(IngredientsAdapter.CARROT
-                    , 40, r2.getRestaurantId(), 1.6, R.drawable.carrot);
+                    , 4, r2.getRestaurantId(), 1.6, R.drawable.carrot);
 
             ingredientDBO.createIngredient(IngredientsAdapter.BANANA_PEPPERS
-                    , 20, r2.getRestaurantId(), 1.5, R.drawable.banana_peppers);
+                    , 2, r2.getRestaurantId(), 1.5, R.drawable.banana_peppers);
 
             ingredientDBO.createIngredient(IngredientsAdapter.BLACK_OLIVES
-                    , 10, r2.getRestaurantId(), 1.7, R.drawable.black_olives);
+                    , 1, r2.getRestaurantId(), 1.7, R.drawable.black_olives);
 
             ingredientDBO.createIngredient(IngredientsAdapter.CHICKEN
-                    , 90, r2.getRestaurantId(), 2.7, R.drawable.chicken);
+                    , 9, r2.getRestaurantId(), 2.7, R.drawable.chicken);
 
             /* restaurant for Chart House */
             ingredientDBO.createIngredient(IngredientsAdapter.LETTUCE
                     , 3, r3.getRestaurantId(), 0.7, R.drawable.romaine_lettuce);
 
             ingredientDBO.createIngredient(IngredientsAdapter.BANANA_PEPPERS
-                    , 20, r3.getRestaurantId(), 1.0, R.drawable.banana_peppers);
+                    , 2, r3.getRestaurantId(), 1.0, R.drawable.banana_peppers);
 
             ingredientDBO.createIngredient(IngredientsAdapter.BLACK_OLIVES
-                    , 10, r3.getRestaurantId(), 1.2, R.drawable.black_olives);
+                    , 1, r3.getRestaurantId(), 1.2, R.drawable.black_olives);
 
             ingredientDBO.createIngredient(IngredientsAdapter.CARROT
-                    , 10, r3.getRestaurantId(), 1.2, R.drawable.carrot);
+                    , 1, r3.getRestaurantId(), 1.2, R.drawable.carrot);
 
             ingredientDBO.createIngredient(IngredientsAdapter.CUCUMBERS
-                    , 20, r3.getRestaurantId(), 0.3, R.drawable.cucumbers);
+                    , 2, r3.getRestaurantId(), 0.3, R.drawable.cucumbers);
 
             ingredientDBO.createIngredient(IngredientsAdapter.CROUTONS
-                    , 30, r3.getRestaurantId(), 1.1, R.drawable.garlic_croutons);
+                    , 3, r3.getRestaurantId(), 1.1, R.drawable.garlic_croutons);
 
             ingredientDBO.createIngredient(IngredientsAdapter.GRAPES
-                    , 20, r3.getRestaurantId(), 1.4, R.drawable.grape);
+                    , 2, r3.getRestaurantId(), 1.4, R.drawable.grape);
 
             ingredientDBO.createIngredient(IngredientsAdapter.ONIONS
-                    , 10, r3.getRestaurantId(), 0.4, R.drawable.onions);
+                    , 1, r3.getRestaurantId(), 0.4, R.drawable.onions);
 
             ingredientDBO.createIngredient(IngredientsAdapter.CHEESE
-                    , 50, r3.getRestaurantId(), 1.6, R.drawable.shredded_cheese);
+                    , 5, r3.getRestaurantId(), 1.6, R.drawable.shredded_cheese);
 
             ingredientDBO.createIngredient(IngredientsAdapter.STRAWBERRY
-                    , 20, r3.getRestaurantId(), 1.7, R.drawable.strawberry);
+                    , 2, r3.getRestaurantId(), 1.7, R.drawable.strawberry);
 
             ingredientDBO.createIngredient(IngredientsAdapter.TOMATO
-                    , 10, r3.getRestaurantId(), 0.2, R.drawable.tomatoes);
+                    , 1, r3.getRestaurantId(), 0.2, R.drawable.tomatoes);
 
             ingredientDBO.createIngredient(IngredientsAdapter.CHICKEN
-                    , 30, r3.getRestaurantId(), 1.6, R.drawable.chicken);
+                    , 3, r3.getRestaurantId(), 1.6, R.drawable.chicken);
 
         }
 
