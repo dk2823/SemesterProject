@@ -27,6 +27,7 @@ public class OrderSentActivity extends Activity {
     private SeekBar mSeekBar;
     private TransitionDrawable mTransitionDrawable;
     private Intent i;
+    boolean allowed= false;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +75,6 @@ public class OrderSentActivity extends Activity {
         ListView listView = (ListView) findViewById(R.id.sampleListView);
         listView.setAdapter(adapter);
         new OrderSentBackground().execute(time*1000);
-
     }
 
 
@@ -110,6 +110,7 @@ public class OrderSentActivity extends Activity {
         }
 
         protected void onPostExecute(Void result) {
+            allowed= true;
             i.setClass(OrderSentActivity.this, OrderPickupActivity.class);
             startActivity(i);
         }
@@ -118,7 +119,10 @@ public class OrderSentActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        Toast.makeText(this, "Please be patient till your order preparation is completed...",
-                Toast.LENGTH_LONG).show();
+        if (!allowed)
+            Toast.makeText(this, "Please be patient till your order preparation is completed...",
+                    Toast.LENGTH_LONG).show();
+        else
+            super.onBackPressed();
     }
 }

@@ -61,7 +61,7 @@ public class OrderConfirmActivity extends Activity {
         }
 
         TextView tvTotalPrice = (TextView) findViewById(R.id.total_price);
-        tvTotalPrice.setText("$" + new DecimalFormat("#.##").format(totalPrice));
+        tvTotalPrice.setText("$" + new DecimalFormat("#.00").format(totalPrice));
 
         final Restaurant restaurant = restaurantDBO.getRestaurantById(list.get(0).getRestaurantId());
 

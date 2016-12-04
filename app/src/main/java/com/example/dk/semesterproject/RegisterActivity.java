@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import database.UserDBO;
 import models.User;
@@ -54,6 +55,8 @@ public class RegisterActivity extends Activity {
                         intent.putExtra(MainActivity.USERNAME,
                                 mUsername.getText().toString().trim());
                         setResult(RESULT_OK, intent);
+                        Toast.makeText(RegisterActivity.this, "Account created successfully...",
+                                Toast.LENGTH_LONG).show();
                         finish();
                         break;
                     case USERNAME_IN_USE:

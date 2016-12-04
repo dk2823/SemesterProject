@@ -56,11 +56,11 @@
 
         <EditText
             android:id="@+id/username_recovery"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:paddingTop="15dp"
-            android:hint="salad@saladbar.com"/>
+            />
 
         <Button
             android:id="@+id/emailButton"

@@ -41,4 +41,8 @@
         <item>Chart House</item>
     </string-array>
     <string name="empty_ing_list">Please grab some ingredients</string>
+    <string name="thank_you">
+        Thank you for choosing SaladBarApp where eating healthy has always been our number one
+        priority. Please be patient while the amazing chefs are actively working on your order...
+    </string>
 </resources>

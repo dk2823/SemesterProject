@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,17 +67,10 @@ public class ConfirmListViewAdapter extends BaseAdapter {
         Ingredient currItem = (Ingredient) getItem(position);
 
         if(currItem != null){
-/*
-            final BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inSampleSize = 8;
-            Bitmap img = BitmapFactory.decodeResource(
-                    mContext.getResources(), currItem.getImageId(), options);
-*/
 
             holder.ingredientImg.setImageResource(currItem.getImageId());
             holder.txName.setText(currItem.getName());
-//            holder.txInfo.setText(currItem.getQuantity() + currItem.getPrice());
-            holder.txInfo.setText("$" + currItem.getPrice());
+            holder.txInfo.setText("$" + new DecimalFormat("#.00").format(currItem.getPrice()));
         }
         return v;
     }

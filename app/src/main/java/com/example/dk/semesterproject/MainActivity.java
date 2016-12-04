@@ -57,6 +57,8 @@ public class MainActivity extends Activity {
                     Intent intent= new Intent(MainActivity.this, OrderActivity.class);
                     intent.putExtra(USERNAME, mUsername.getText().toString().trim());
                     startActivity(intent);
+                } else {
+                    mStatus.setText(R.string.invalid_user);
                 }
             }
         });
@@ -87,6 +89,7 @@ public class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
         mPassword.setText("");
+        mStatus.setText("");
     }
 
     @Override
