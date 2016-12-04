@@ -105,7 +105,6 @@ public class OrderSentActivity extends Activity {
         }
 
         protected void onProgressUpdate(Integer... values){
-           // super.onProgressUpdate(values[0]);
             mSeekBar.setProgress(values[0]);
         }
 
